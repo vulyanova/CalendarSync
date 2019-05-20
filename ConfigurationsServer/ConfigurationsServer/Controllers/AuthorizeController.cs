@@ -26,7 +26,6 @@ namespace ConfigurationsServer.Controllers
         [HttpPost]
         public Databases.AuthorizeConfigurations PostAuthorizeConfigurations([FromBody] Databases.AuthorizeConfigurations authorizeConfigs)
         {
-
             var googleCalendar = new GoogleCalendar(authorizeConfigs.ToGoogle());
             var credential = googleCalendar.Credential;
 

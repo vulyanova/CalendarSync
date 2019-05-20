@@ -36,12 +36,9 @@ namespace Databases
         public void AddAuthorizationParameters(AuthorizeConfigurations authorizeConfigurations)
         {
             var collection = _database.GetCollection<AuthorizeConfigurations>(AuthorizationCollection);
-            var record = collection.Find(item => item.User == authorizeConfigurations.User).FirstOrDefault();
+            collection.DeleteMany(item => item.User == authorizeConfigurations.User);
 
-            if (record == null)
-                collection.InsertOne(authorizeConfigurations);
-            else
-                collection.ReplaceOne(item => item.User == authorizeConfigurations.User, authorizeConfigurations);
+            collection.InsertOne(authorizeConfigurations);  
         }
 
         public AuthorizeConfigurations GetAuthorizationParameters(string user)

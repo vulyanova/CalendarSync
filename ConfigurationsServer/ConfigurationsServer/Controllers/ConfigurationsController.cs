@@ -14,6 +14,7 @@ namespace ConfigurationsServer.Controllers
         {
             var database = new MongoDatabase();
             database.AddConfigurations(configurations);
+            
 
             return configurations;
         }
