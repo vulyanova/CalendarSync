@@ -3,18 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "acorn": "^6.1.1",
-    "ajax": "0.0.4",
     "axios": "^0.18.0",
-    "babel": "^6.23.0",
-    "babel-cli": "^6.26.0",
     "body-parser": "^1.18.3",
     "bootstrap": "^3.4.1",
-    "dns": "^0.2.2",
-    "express": "^4.16.4",
     "module": "^1.2.5",
-    "prototype": "0.0.5",
-    "qs": "^6.7.0",
     "react": "^16.8.6",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.8.6",
@@ -24,8 +16,7 @@
     "react-scripts": "1.0.17",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.2",
-    "rimraf": "^2.6.3",
-    "tedious": "^6.1.0"
+    "rimraf": "^2.6.3"
   },
   "scripts": {
     "start": "rimraf ./build && react-scripts start",
