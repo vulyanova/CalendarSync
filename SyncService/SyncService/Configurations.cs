@@ -8,7 +8,7 @@ namespace SyncService
         private static Configurations _instance = null;
         public string CalendarId { get; private set; }
         public int Timer { get; private set; }
-        public bool ShowSummary { get; private set; }
+        public bool ShowSummary { get; private set; } = true;
 
         private static readonly string url = "https://localhost:5001/api/configurations/";
 

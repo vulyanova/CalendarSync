@@ -4,7 +4,7 @@ using Xunit;
 
 namespace SyncCalendars.Test
 {
-    public class SynchronizerTest
+    public class SynchronizerTests
     {
         public static Synchronizer.Synchronizer SyncCalendars(List<MainSyncItem> connection, bool isPrivate)
         {
@@ -29,10 +29,10 @@ namespace SyncCalendars.Test
             var expected = Appointment.Status.Checked;
 
             var synchronizer = SyncCalendars(ConnectionsCollection.GetConnectionForAdding(), false);
-            var googleCalendar = synchronizer.Calendars.Find(item => item.Type == type);
-            var newGoogleItem = googleCalendar.Appointments.Find(item => item.Id == id);
+            var calendar = synchronizer.Calendars.Find(item => item.Type == type);
+            var newItem = calendar.Appointments.Find(item => item.Id == id);
 
-            Assert.Equal(expected, newGoogleItem.AppointmentStatus);
+            Assert.Equal(expected, newItem.AppointmentStatus);
         }
 
         [Theory]
@@ -43,11 +43,11 @@ namespace SyncCalendars.Test
         public void NewAppointments_CorrectCreatorId(CalendarType type, string subject, string expected)
         {
             var synchronizer = SyncCalendars(ConnectionsCollection.GetConnectionForAdding(), false);
-            var googleCalendar = synchronizer.Calendars.Find(item => item.Type == type);
-            var newGoogleItem = googleCalendar.Appointments.
+            var calendar = synchronizer.Calendars.Find(item => item.Type == type);
+            var newItem = calendar.Appointments.
                 Find(item => item.Subject == subject && item.Id == null);
 
-            Assert.Equal(expected, newGoogleItem.CreatorId);
+            Assert.Equal(expected, newItem.CreatorId);
         }
 
         [Theory]
@@ -60,10 +60,10 @@ namespace SyncCalendars.Test
             var expected = Appointment.Status.New;
 
             var synchronizer = SyncCalendars(ConnectionsCollection.GetConnectionForAdding(), false);
-            var googleCalendar = synchronizer.Calendars.Find(item => item.Type == type);
-            var newGoogleItem = googleCalendar.Appointments.Find(item => item.CreatorId == creatorId);
+            var calendar = synchronizer.Calendars.Find(item => item.Type == type);
+            var newItem = calendar.Appointments.Find(item => item.CreatorId == creatorId);
 
-            Assert.Equal(expected, newGoogleItem.AppointmentStatus);
+            Assert.Equal(expected, newItem.AppointmentStatus);
         }
 
         [Theory]
@@ -74,10 +74,10 @@ namespace SyncCalendars.Test
             var expected = Appointment.Status.Changed;
 
             var synchronizer = SyncCalendars(ConnectionsCollection.GetConnectionForUpdating(), false);
-            var googleCalendar = synchronizer.Calendars.Find(item => item.Type == type);
-            var newGoogleItem = googleCalendar.Appointments.Find(item => item.Id == id);
+            var calendar = synchronizer.Calendars.Find(item => item.Type == type);
+            var newItem = calendar.Appointments.Find(item => item.Id == id);
 
-            Assert.Equal(expected, newGoogleItem.AppointmentStatus);
+            Assert.Equal(expected, newItem.AppointmentStatus);
         }
 
         [Theory]
@@ -88,10 +88,10 @@ namespace SyncCalendars.Test
             var expected = Appointment.Status.Deleted;
 
             var synchronizer = SyncCalendars(ConnectionsCollection.GetConnectionForDeleting(), false);
-            var googleCalendar = synchronizer.Calendars.Find(item => item.Type == type);
-            var newGoogleItem = googleCalendar.Appointments.Find(item => item.Id == id);
+            var calendar = synchronizer.Calendars.Find(item => item.Type == type);
+            var newItem = calendar.Appointments.Find(item => item.Id == id);
 
-            Assert.Equal(expected, newGoogleItem.AppointmentStatus);
+            Assert.Equal(expected, newItem.AppointmentStatus);
         }
 
         [Theory]
@@ -103,10 +103,10 @@ namespace SyncCalendars.Test
             var expected = Appointment.Status.Checked;
 
             var synchronizer = SyncCalendars(ConnectionsCollection.GetConnectionForUpdating(), true);
-            var googleCalendar = synchronizer.Calendars.Find(item => item.Type == type);
-            var newGoogleItem = googleCalendar.Appointments.Find(item => item.Id == id);
+            var calendar = synchronizer.Calendars.Find(item => item.Type == type);
+            var newItem = calendar.Appointments.Find(item => item.Id == id);
 
-            Assert.Equal(expected, newGoogleItem.AppointmentStatus);
+            Assert.Equal(expected, newItem.AppointmentStatus);
         }
 
         [Fact]

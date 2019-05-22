@@ -36,12 +36,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Calendars">
+      <HintPath>..\..\GoogleCalendar\GoogleCalendar\bin\Debug\Calendars.dll</HintPath>
+    </Reference>
     <Reference Include="SyncCalendarsLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SyncCalendarsLibrary\SyncCalendarsLibrary\bin\Debug\SyncCalendarsLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Synchronizer">
       <HintPath>..\..\..\..\..\Projects\Synchronizer\Synchronizer\bin\Debug\Synchronizer.dll</HintPath>
+    </Reference>
+    <Reference Include="SyncService">
+      <HintPath>..\..\SyncService\SyncService\bin\Debug\SyncService.exe</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -66,9 +72,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionsCollection.cs" />
+    <Compile Include="CalendarTests.cs" />
     <Compile Include="ItemsCollection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SynchronizerTest.cs" />
+    <Compile Include="SynchronizerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

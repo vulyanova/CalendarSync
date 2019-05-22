@@ -1,5 +1,6 @@
 ﻿using Calendars;
 using Synchronizer;
+using SyncService.CalendarAdapters;
 using SyncService.DbAdapters.MongoDbAdapter;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -33,11 +34,15 @@ namespace SyncService
             var googleCalendar = GoogleCalendarAdapter.GetInstance();
             var outlookCalendar = OutlookCalendarAdapter.GetInstance();
 
+            if (configuratons.ShowSummary)
+                outlookCalendar.ShowSummary();
+            else outlookCalendar.HideSummary();
+            
             var db = new MongoDbAdapter(user);
 
             var syncAppointments = db.GetCalendarItems();
             var googleAppointments = await googleCalendar.GetNearestAppointmentsAsync();
-            var outlookAppointments = outlookCalendar.GetNearestAppointments();
+            var outlookAppointments = await outlookCalendar.GetNearestAppointmentsAsync();
 
             var calendars = new List<Calendar>
                 {
@@ -60,9 +65,9 @@ namespace SyncService
 
             synchronizer.AddNewAppointments();
 
-            await googleCalendar.UpdateGoogleAsync(synchronizer.Calendars.Find(item => item.Type == CalendarType.Google).Appointments);
+            await googleCalendar.UpdateAsync(synchronizer.Calendars.Find(item => item.Type == CalendarType.Google).Appointments);
 
-            outlookCalendar.UpdateOutlook(synchronizer.Calendars.Find(item => item.Type == CalendarType.Outlook).Appointments);
+            await outlookCalendar.UpdateAsync(synchronizer.Calendars.Find(item => item.Type == CalendarType.Outlook).Appointments);
 
             DbSync.Sync(db, synchronizer.Calendars);
 

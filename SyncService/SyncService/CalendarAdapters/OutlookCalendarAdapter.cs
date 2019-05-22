@@ -2,25 +2,34 @@
 using Synchronizer;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace SyncService
+namespace SyncService.CalendarAdapters
 {
-    public class OutlookCalendarAdapter
+    public class OutlookCalendarAdapter: ICalendar
     {
         private static OutlookCalendarAdapter _instance;
         private Application _oApp;
         private NameSpace _mapiNS;
         private List<AppointmentItem> _items;
-        private bool _showSummary;
+        private bool _showSummary ;
 
         private OutlookCalendarAdapter()
         {
             _oApp = new Application();
             _mapiNS = _oApp.GetNamespace("MAPI");
             _items = new List<AppointmentItem>();
+            _showSummary = true;
+        }
 
-            var configurations = Configurations.GetInstance();
-            _showSummary = configurations.ShowSummary;
+        public void ShowSummary()
+        {
+            _showSummary = true;
+        }
+
+        public void HideSummary()
+        {
+            _showSummary = false;
         }
 
         public static OutlookCalendarAdapter GetInstance()
@@ -31,16 +40,17 @@ namespace SyncService
             return _instance;
         }
 
-        public void DeleteAppointment(string id)
+        public async Task DeleteAppointmentAsync(string id)
         {
             foreach (AppointmentItem item in _items)
             {
                 if (item.GlobalAppointmentID == id)
                     item.Delete();
             }
+            await Task.CompletedTask;
         }
 
-        public List<Appointment> GetNearestAppointments()
+        public async Task<List<Appointment>> GetNearestAppointmentsAsync()
         {
             var CalendarFolder = _mapiNS.GetDefaultFolder(OlDefaultFolders.olFolderCalendar);
             var items = CalendarFolder.Items;
@@ -77,10 +87,10 @@ namespace SyncService
                 }
             }
 
-            return list;
+            return await Task.FromResult(list);
         }
 
-        public void UpdateAppointment(Appointment appointment)
+        public async Task UpdateAppointmentAsync(Appointment appointment)
         {
             var attendees = "";
             foreach (var attendee in appointment.Attendees)
@@ -101,9 +111,11 @@ namespace SyncService
                     item.Save();
                     item.Send();
                 }
+
+            await Task.CompletedTask;
         }
 
-        public string AddAppointment(Appointment appointment)
+        public async Task<string> AddAppointmentAsync(Appointment appointment)
         {
             string profile = "";
             _mapiNS.Logon(profile, null, null, null);
@@ -125,7 +137,7 @@ namespace SyncService
             item.Send();
             var id = item.GlobalAppointmentID;
 
-            return id;
+            return await Task.FromResult(id);
         }
 
         public void Disconnect()
@@ -138,19 +150,21 @@ namespace SyncService
             _instance = null;
         }
 
-        public void UpdateOutlook(List<Appointment> appointments)
+        public async Task UpdateAsync(List<Appointment> appointments)
         {
             foreach (var item in appointments)
             {
                 if (item.AppointmentStatus == Appointment.Status.New)
-                    item.Id = AddAppointment(item);
+                    item.Id = await AddAppointmentAsync(item);
 
                 if (item.AppointmentStatus == Appointment.Status.Deleted)
-                    DeleteAppointment(item.Id);
+                    await DeleteAppointmentAsync(item.Id);
 
                 if (item.AppointmentStatus == Appointment.Status.Changed)
-                    UpdateAppointment(item);
+                    await UpdateAppointmentAsync(item);
             }
+
+            await Task.CompletedTask;
         }
     }
 }

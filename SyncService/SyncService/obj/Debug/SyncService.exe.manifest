@@ -54,14 +54,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Databases.dll" size="9216">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Databases.dll" size="8704">
       <assemblyIdentity name="Databases" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>iAEDKBP9vmyNsqIdk2zjX8pIKpn8ZbjvNu4f4jhj618=</dsig:DigestValue>
+        <dsig:DigestValue>tyE19QRAZTHUjaSpCH7uwMvCmddleHNI01f0tkyOEUY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -234,14 +234,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SyncService.exe" size="34816">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SyncService.exe" size="39936">
       <assemblyIdentity name="SyncService" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>siDq5vHznZc3upXb6HJGB9d2rR6VIaZ93HBU3cbboCg=</dsig:DigestValue>
+        <dsig:DigestValue>7cO28XDrkUMp/PufuE+swyxotfFxZl2QN7O0XBU48Gc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

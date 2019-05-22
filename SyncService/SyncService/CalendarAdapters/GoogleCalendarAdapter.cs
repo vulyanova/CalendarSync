@@ -5,9 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SyncService
+namespace SyncService.CalendarAdapters
 {
-    public class GoogleCalendarAdapter
+    public class GoogleCalendarAdapter: ICalendar
     {
         private static GoogleCalendarAdapter _instance;
         private GoogleCalendar _calendar;
@@ -30,7 +30,7 @@ namespace SyncService
             return _instance;
         }
 
-        public async Task UpdateGoogleAsync(List<Appointment> appointments)
+        public async Task UpdateAsync(List<Appointment> appointments)
         {
             foreach (var item in appointments)
             {
