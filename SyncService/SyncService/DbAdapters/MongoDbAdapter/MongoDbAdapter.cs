@@ -2,6 +2,8 @@
 using MongoDB.Driver;
 using Synchronizer;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace SyncService.DbAdapters.MongoDbAdapter
 {
@@ -16,19 +18,19 @@ namespace SyncService.DbAdapters.MongoDbAdapter
             _collection = database.GetCollection<MongoItem>(collection);
         }
 
-        public void Add(MainSyncItem syncAppointment)
+        public async Task Add(MainSyncItem syncAppointment)
         {
             var item = new MongoItem(syncAppointment);
 
-            _collection.InsertOne(item);
+            await _collection.InsertOneAsync(item);
         }
 
-        public List<MainSyncItem> GetCalendarItems()
+        public async Task<List<MainSyncItem>> GetCalendarItems()
         {
             var result = new List<MainSyncItem>();
-            var items = _collection.Find(item => item.GoogleId != null).ToEnumerable();
+            var items = await _collection.FindAsync(item => item.GoogleId != null);
 
-            foreach (var item in items)
+            foreach (var item in items.ToEnumerable())
             {
                 result.Add(new MainSyncItem
                 {
@@ -39,12 +41,28 @@ namespace SyncService.DbAdapters.MongoDbAdapter
             return result;
         }
 
-        public void Remove(MainSyncItem syncAppointment)
+        public async Task Remove(MainSyncItem syncAppointment)
         {
-            _collection.DeleteOne(item => item.GoogleId == syncAppointment.GoogleId);
+            await _collection.DeleteOneAsync(item => item.GoogleId == syncAppointment.GoogleId);
         }
 
-        public void Save()
-        { }
+        public async Task Save()
+        {
+            await Task.CompletedTask;
+        }
+
+        public async Task Synchronize(List<MainSyncItem> syncAppointments)
+        {
+            var items = await GetCalendarItems();
+
+            foreach (var item in items)
+                if (syncAppointments.Where(connection => connection.GoogleId == item.GoogleId).Count() == 0)
+                    await Remove(item);
+
+            foreach (var syncAppointment in syncAppointments)
+                if (items.Where(connection => connection.GoogleId == syncAppointment.GoogleId).Count() == 0)
+                    await Add(syncAppointment);
+
+        }
     }
 }

@@ -30,18 +30,21 @@ namespace SyncService
             var configuratons = Configurations.GetInstance();
 
             var timer = new Timer();
-            timer.Elapsed += (sender, e) => OnTimer(user);
+            timer.Elapsed += (sender, e) => OnTimer(timer, user);
             timer.Interval = configuratons.Timer;
             timer.Enabled = true;
+            
         }
 
         protected override void OnStop()
         {
         }
 
-        public void OnTimer(string user)
+        public void OnTimer(Timer timer, string user)
         {
+            timer.Stop();
             SyncController.Sync(user).Wait();
+            timer.Start();
         }
     }
 }

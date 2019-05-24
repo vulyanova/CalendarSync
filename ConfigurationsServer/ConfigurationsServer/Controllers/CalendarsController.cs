@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Calendars;
 using Databases;
 using Microsoft.AspNetCore.Cors;
@@ -11,10 +12,10 @@ namespace ConfigurationsServer.Controllers
     {
         [EnableCors("Policy")]
         [HttpGet("{user}")]
-        public Calendar[] GetCalendars(string user)
+        public async Task<Calendar[]> GetCalendars(string user)
         {
             var database = new MongoDatabase();
-            var authorizeConfigs = database.GetAuthorizationParameters(user);
+            var authorizeConfigs = await database.GetAuthorizationParametersAsync(user);
 
             var googleCalendar = new GoogleCalendar(authorizeConfigs.ToGoogle());
             var service = googleCalendar.GetService();

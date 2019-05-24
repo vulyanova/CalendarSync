@@ -2,6 +2,7 @@
 using Databases;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace ConfigurationsServer.Controllers
 {
@@ -24,7 +25,7 @@ namespace ConfigurationsServer.Controllers
 
         [EnableCors("Policy")]
         [HttpPost]
-        public Databases.AuthorizeConfigurations PostAuthorizeConfigurations([FromBody] Databases.AuthorizeConfigurations authorizeConfigs)
+        public async Task<Databases.AuthorizeConfigurations> PostAuthorizeConfigurations([FromBody] Databases.AuthorizeConfigurations authorizeConfigs)
         {
             var googleCalendar = new GoogleCalendar(authorizeConfigs.ToGoogle());
             var credential = googleCalendar.Credential;
@@ -33,19 +34,27 @@ namespace ConfigurationsServer.Controllers
             authorizeConfigs.RefreshToken = credential.Token.RefreshToken;
 
             var database = new MongoDatabase();
-            database.AddAuthorizationParameters(authorizeConfigs);
+            await database.AddAuthorizationParametersAsync(authorizeConfigs);
 
             return authorizeConfigs;
         }
 
         [EnableCors("Policy")]
         [HttpGet ("{user}")]
-        public Calendars.AuthorizeConfigurations GetAuthorizeConfigurations(string user)
+        public async Task<Calendars.AuthorizeConfigurations> GetAuthorizeConfigurations(string user)
         {
             var database = new MongoDatabase();
-            var authorizeConfigurations = database.GetAuthorizationParameters(user);
+            var authorizeConfigurations = await database.GetAuthorizationParametersAsync(user);
 
             return authorizeConfigurations.ToGoogle();
+        }
+
+        [EnableCors("Policy")]
+        [HttpDelete("{user}")]
+        public async Task DeleteAuthorizeConfigurations(string user)
+        {
+            var database = new MongoDatabase();
+            await database.DeleteAuthorizationParametersAsync(user);
         }
 
     }

@@ -1,6 +1,7 @@
 ﻿using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Databases
 {
@@ -29,43 +30,50 @@ namespace Databases
             var collection = _database.GetCollection<AuthorizeConfigurations>(AuthorizationCollection);
 
             var list = collection.AsQueryable().Select(item => item.User).ToList();
-
+            
             return list;
         }
 
-        public void AddAuthorizationParameters(AuthorizeConfigurations authorizeConfigurations)
+        public async Task DeleteAuthorizationParametersAsync(string user)
         {
             var collection = _database.GetCollection<AuthorizeConfigurations>(AuthorizationCollection);
-            collection.DeleteMany(item => item.User == authorizeConfigurations.User);
-
-            collection.InsertOne(authorizeConfigurations);  
+            await collection.DeleteManyAsync(item => item.User == user);      
         }
 
-        public AuthorizeConfigurations GetAuthorizationParameters(string user)
+        public async Task AddAuthorizationParametersAsync(AuthorizeConfigurations authorizeConfigurations)
         {
             var collection = _database.GetCollection<AuthorizeConfigurations>(AuthorizationCollection);
-            var record = collection.Find(item => item.User == user).FirstOrDefault();
+            await collection.DeleteManyAsync(item => item.User == authorizeConfigurations.User);
 
-            return record;
+            await collection.InsertOneAsync(authorizeConfigurations);
         }
 
-        public MongoConfigurations GetConfigurations(string user)
+        public async Task<AuthorizeConfigurations> GetAuthorizationParametersAsync(string user)
         {
-            var collection = _database.GetCollection<MongoConfigurations>(ConfigurationsCollection);
-            var record = collection.Find(item => item.User == user).FirstOrDefault();
+            var collection = _database.GetCollection<AuthorizeConfigurations>(AuthorizationCollection);
+            var records = await collection.FindAsync(item => item.User == user);
 
-            return record;
+            return records.FirstOrDefault();
         }
 
-        public void AddConfigurations(MongoConfigurations configurations)
+        public async Task<MongoConfigurations> GetConfigurationsAsync(string user)
         {
             var collection = _database.GetCollection<MongoConfigurations>(ConfigurationsCollection);
-            collection.DeleteMany(item => item.User == configurations.User);
-            collection.InsertOne(configurations);
+            var records = await collection.FindAsync(item => item.User == user);
 
-            var collections = _database.ListCollectionNames().ToEnumerable();
-            if (!collections.Contains(configurations.User))
-                _database.CreateCollection(configurations.User);
+            return records.FirstOrDefault();
+        }
+
+        public async Task AddConfigurationsAsync(MongoConfigurations configurations)
+        {
+            var collection = _database.GetCollection<MongoConfigurations>(ConfigurationsCollection);
+            await collection.DeleteManyAsync(item => item.User == configurations.User);
+            await collection.InsertOneAsync(configurations);
+
+            var collections = await _database.ListCollectionNamesAsync();
+
+            if (!collections.ToEnumerable().Contains(configurations.User))
+                await _database.CreateCollectionAsync(configurations.User);
 
         }
 

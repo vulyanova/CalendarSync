@@ -40,7 +40,7 @@ namespace SyncService
             
             var db = new MongoDbAdapter(user);
 
-            var syncAppointments = db.GetCalendarItems();
+            var syncAppointments = await db.GetCalendarItems();
             var googleAppointments = await googleCalendar.GetNearestAppointmentsAsync();
             var outlookAppointments = await outlookCalendar.GetNearestAppointmentsAsync();
 
@@ -69,7 +69,9 @@ namespace SyncService
 
             await outlookCalendar.UpdateAsync(synchronizer.Calendars.Find(item => item.Type == CalendarType.Outlook).Appointments);
 
-            DbSync.Sync(db, synchronizer.Calendars);
+            DbSync.Synchronize(syncAppointments, synchronizer.Calendars);
+
+            await db.Synchronize(syncAppointments);
 
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Databases;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace ConfigurationsServer.Controllers
 {
@@ -10,10 +11,10 @@ namespace ConfigurationsServer.Controllers
 
         [EnableCors("Policy")]
         [HttpPost]
-        public MongoConfigurations PostConfigurations([FromBody] MongoConfigurations configurations)
+        public async Task<MongoConfigurations> PostConfigurations([FromBody] MongoConfigurations configurations)
         {
             var database = new MongoDatabase();
-            database.AddConfigurations(configurations);
+            await database.AddConfigurationsAsync(configurations);
             
 
             return configurations;
@@ -21,10 +22,10 @@ namespace ConfigurationsServer.Controllers
 
         [EnableCors("Policy")]
         [HttpGet ("{user}")]
-        public MongoConfigurations GetConfigurations(string user)
+        public async Task<MongoConfigurations> GetConfigurations(string user)
         {
             var database = new MongoDatabase();
-            var configurations = database.GetConfigurations(user);
+            var configurations = await database.GetConfigurationsAsync(user);
 
             return configurations;
         }

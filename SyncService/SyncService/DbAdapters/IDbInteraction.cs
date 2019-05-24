@@ -1,13 +1,15 @@
 ﻿using Synchronizer;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SyncService.DbAdapters
 {
     public interface IDbInteraction
     {
-        void Add(MainSyncItem syncAppointment);
-        void Remove(MainSyncItem syncAppointment);
-        List<MainSyncItem> GetCalendarItems();
-        void Save();
+        Task Synchronize(List<MainSyncItem> syncAppointments);
+        Task Add(MainSyncItem syncAppointment);
+        Task Remove(MainSyncItem syncAppointment);
+        Task<List<MainSyncItem>> GetCalendarItems();
+        Task Save();
     }
 }

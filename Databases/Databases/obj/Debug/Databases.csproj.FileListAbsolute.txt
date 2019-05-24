@@ -107,7 +107,6 @@ C:\Projects\Databases\Databases\bin\Debug\MongoDB.Bson.xml
 C:\Projects\Databases\Databases\bin\Debug\MongoDB.Driver.xml
 C:\Projects\Databases\Databases\bin\Debug\MongoDB.Driver.Core.xml
 C:\Projects\Databases\Databases\bin\Debug\System.Buffers.xml
-C:\Projects\Databases\Databases\obj\Debug\Databases.csprojAssemblyReference.cache
 C:\Projects\Databases\Databases\obj\Debug\Databases.csproj.CoreCompileInputs.cache
 C:\Projects\Databases\Databases\obj\Debug\Databases.csproj.CopyComplete
 C:\Projects\Databases\Databases\obj\Debug\Databases.dll
