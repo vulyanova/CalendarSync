@@ -3,7 +3,6 @@ using Synchronizer;
 using SyncService.CalendarAdapters;
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -79,7 +78,7 @@ namespace SyncCalendars.Test
                 Location = "test"
             };
             var id = await calendar.AddAppointmentAsync(appointment);
-            Thread.Sleep(5000);
+
             await calendar.DeleteAppointmentAsync(id);
 
             Assert.NotNull(id);
@@ -120,10 +119,9 @@ namespace SyncCalendars.Test
 
             appointments = await calendar.GetNearestAppointmentsAsync();
             var updatedAppointment = appointments.Find(item => item.Id == id);
-
-            await calendar.DeleteAppointmentAsync(id);
+    
             Assert.Equal(startDate, updatedAppointment.Date.Start, TimeSpan.FromMinutes(1));
-
+            await calendar.DeleteAppointmentAsync(id);
         }
 
     }

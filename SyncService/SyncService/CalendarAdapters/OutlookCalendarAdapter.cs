@@ -42,10 +42,17 @@ namespace SyncService.CalendarAdapters
 
         public async Task DeleteAppointmentAsync(string id)
         {
+            AppointmentItem deleted = null;
             foreach (AppointmentItem item in _items)
             {
                 if (item.GlobalAppointmentID == id)
-                    item.Delete();
+                    deleted = item;
+            }
+
+            if (deleted!=null)
+            {
+                _items.Remove(deleted);
+                deleted.Delete();
             }
             await Task.CompletedTask;
         }
@@ -120,7 +127,7 @@ namespace SyncService.CalendarAdapters
             string profile = "";
             _mapiNS.Logon(profile, null, null, null);
 
-            var item = (_AppointmentItem)_oApp.CreateItem(OlItemType.olAppointmentItem);
+            var item = (AppointmentItem)_oApp.CreateItem(OlItemType.olAppointmentItem);
 
             var attendees = "";
             foreach (var attendee in appointment.Attendees)
@@ -136,6 +143,8 @@ namespace SyncService.CalendarAdapters
             item.Save();
             item.Send();
             var id = item.GlobalAppointmentID;
+
+            _items.Add(item);
 
             return await Task.FromResult(id);
         }
