@@ -6,11 +6,6 @@ using System.Threading.Tasks;
 
 namespace ConfigurationsServer.Controllers
 {
-    public class Calendar
-    {
-        public string Name;
-        public string Id;
-    }
 
     [Route("api/[controller]/")]
     public class AuthorizeController : Controller

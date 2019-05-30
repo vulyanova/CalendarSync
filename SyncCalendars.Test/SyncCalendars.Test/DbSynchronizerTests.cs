@@ -8,8 +8,9 @@ namespace SyncCalendars.Test
 {
     public class DbSynchronizerTests
     {
+        // todo
         [Fact]
-        public void NewAppointments_UpdateDb()
+        public void BADTEST_NewAppointments_UpdateDb()
         {
             var existedItems = new List<MainSyncItem>()
             {

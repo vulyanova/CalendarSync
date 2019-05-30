@@ -10,6 +10,7 @@ namespace Databases
         public string User;
         public string AccessToken;
         public string RefreshToken;
+        public string CalendarKey;
 
         public Calendars.AuthorizeConfigurations ToGoogle()
         {
@@ -19,7 +20,8 @@ namespace Databases
                 RefreshToken = RefreshToken,
                 ClientId = ClientId,
                 ClientSecret = ClientSecret,
-                User = User
+                User = User,
+                CalendarKey = CalendarKey
             };
 
             return googleAuthorizeConfigs;

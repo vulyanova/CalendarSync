@@ -75,7 +75,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GoogleCalendar\AuthorizationConfigurations.cs" />
+    <Compile Include="AuthorizationConfigurations.cs" />
     <Compile Include="GoogleCalendar\GoogleCalendar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TeamUpCalendar\TeamUpCalendar.cs" />

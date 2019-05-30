@@ -6,6 +6,7 @@
         public string Calendar;
         public int Timer;
         public bool ShowSummary;
+        public int TeamUpCalendar;
 
     }
 }

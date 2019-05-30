@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import Timer from '../containers/timerContainer';
 import Summary from '../containers/summaryContainer';
+import TeamUpCalendar from '../containers/teamUpCalendarContainer';
 import Calendar from '../containers/calendarContainer';
 
 const Configure = (props) => {
@@ -11,6 +12,7 @@ const Configure = (props) => {
                 <tr>
                     <th>User</th>
                     <th>Calendar</th>
+                    <th>TeamUpCalendar</th>
                     <th>Timer</th>
                     <th>Show summary</th>
                 </tr>
@@ -19,6 +21,7 @@ const Configure = (props) => {
                 <tr>
                     <td><h5>{props.configurations.user}</h5></td>
                     <td><Calendar /></td>
+                    <td><TeamUpCalendar /></td>
                     <td><Timer /></td>
                     <td><Summary /></td>
                 </tr>

@@ -7,6 +7,7 @@ namespace SyncService
     {
         private static Configurations _instance = null;
         public string CalendarId { get; private set; }
+        public int TeamUpCalendarId { get; private set; }
         public int Timer { get; private set; }
         public bool ShowSummary { get; private set; } = true;
 
@@ -27,6 +28,7 @@ namespace SyncService
         private Configurations(Configs configs)
         {
             CalendarId = configs.Calendar;
+            TeamUpCalendarId = configs.TeamUpCalendar;
             Timer = configs.Timer;
             ShowSummary = configs.ShowSummary;
         }

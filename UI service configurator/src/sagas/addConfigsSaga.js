@@ -10,6 +10,7 @@ function postConfigs(configurations) {
         user: configurations.user,
         timer: configurations.timer,
         calendar: configurations.calendar,
+        teamUpCalendar: configurations.teamUpCalendar,
         showSummary: configurations.showSummary
     });
 }

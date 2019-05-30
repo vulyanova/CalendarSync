@@ -7,6 +7,7 @@ namespace Databases
         public ObjectId Id;
         public string User;
         public string Calendar;
+        public int TeamUpCalendar;
         public int Timer;
         public bool ShowSummary;
     }

@@ -21,17 +21,6 @@ namespace SyncCalendars.Test
         }
 
         [Fact]
-        public async Task MongoDb_GetConfigurations_SuccessfullGetting()
-        {
-            var expected = "primary";
-
-            await Configurations.GetConfigurations(_testUser);
-            var configurations = Configurations.GetInstance();
-
-            Assert.Equal(expected, configurations.CalendarId);
-        }
-
-        [Fact]
         public async Task MongoDb_AddConnections_SuccessfullAddition()
         {
             await CleanTestUserDb();

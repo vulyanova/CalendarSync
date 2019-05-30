@@ -33,10 +33,10 @@ namespace SyncCalendars.Test
 
             Assert.True(result.Where(item => item.Id == appointment.Id && item.Location == "Moscow").Count()>0);
 
-           /* await teamUpCalendar.DeleteAppointment(appointment);
+            await teamUpCalendar.DeleteAppointment(appointment);
             result = await teamUpCalendar.GetNearestAppointments();
 
-            Assert.True(result.Where(item => item.Id == appointment.Id).Count() == 0);*/
+            Assert.True(result.Where(item => item.Id == appointment.Id).Count() == 0);
         }
     }
 }

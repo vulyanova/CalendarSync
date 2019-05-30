@@ -3,7 +3,8 @@
     clientSecret: '',
     user: '',
     accessToken: '',
-    refreshToken: ''
+    refreshToken: '',
+    calendarKey: '',
 };
 
 export const authorizationParams = (state = initialState, action) => {
@@ -13,6 +14,11 @@ export const authorizationParams = (state = initialState, action) => {
                 ...state,
                 id: action.id
             }
+        case 'CHANGE_CALENDAR_KEY':
+                return {
+                    ...state,
+                    calendarKey: action.calendarKey
+                }
         case 'CHANGE_CLIENT_ID':
             return {
                 ...state,

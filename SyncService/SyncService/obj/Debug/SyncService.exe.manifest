@@ -49,7 +49,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>caHBVWJW3ZhzLNvIITLjgBQKn/yKyxTKD2V7Bhxi+LM=</dsig:DigestValue>
+        <dsig:DigestValue>5IlXm0E+3sM8UVevuvf5uSE4DwT9VgprSxnnzr9afWE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -61,7 +61,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ox7pt67574Dr8Ao5AIe1VBiqmEpjjdQE6YS1ZBYn9x4=</dsig:DigestValue>
+        <dsig:DigestValue>+xEBA9qyZT+XUCw2Ip5CftEpBESbNV8WAOGgHt5LTFg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -234,14 +234,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SyncService.exe" size="49664">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SyncService.exe" size="50176">
       <assemblyIdentity name="SyncService" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>cRTmVKUgCmoa8IxybQC+Ichk4BzQdSMns4KEsiWB3ec=</dsig:DigestValue>
+        <dsig:DigestValue>XyWh3xU74uSND7UBpc9JXE4Oiiuz3ns61gs2RbIi/sE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -68,6 +68,12 @@ export const getCalendars = (user) => ({
     user
 })
 
+export const getTeamUpCalendars = (calendarKey) => ({
+    type: "GET_CALENDARS",
+    calendarKey
+})
+
+
 export const sendConfigurations = (configurations) => ({
     type: "ADD_CONFIGS",
     configurations
@@ -76,3 +82,24 @@ export const sendConfigurations = (configurations) => ({
 export const getUsers = () => ({
     type: "GET_USERS"
 })
+
+export const changeApiKey = (apiKey) => ({
+    type: "CHANGE_API_KEY",
+    apiKey
+})
+
+export const changeCalendarKey = (calendarKey) => ({
+    type: "CHANGE_CALENDAR_KEY",
+    calendarKey
+})
+
+export const changeSubcalendarId = (subcalendarId) => ({
+    type: "CHANGE_SUBCALENDAR_ID",
+    subcalendarId
+})
+
+export const changeTeamUpCalendar = (teamUpCalendar) => ({
+    type: "CHANGE_TEAM_UP_CALENDAR",
+    teamUpCalendar
+})
+

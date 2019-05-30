@@ -23,6 +23,11 @@ export const applicationParams = (state = initialState, action) => {
                 ...state,
                 isLoading: true
             }
+        case 'GET_TEAM_UP_CALENDARS':
+                return {
+                    ...state,
+                    isLoading: true
+                }
         case 'GET_TIMERS':
             return {
                 ...state,

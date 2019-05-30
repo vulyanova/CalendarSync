@@ -12,6 +12,5 @@ function authorize(authorizationParams) {
 function* workerSaga(action) {
     yield call(authorize, action.authorizationParams);    
     const user = action.authorizationParams.user;
-
-    yield put ({ type: "GET_CALENDARS", user })
+    yield put ({ type: "GET_CALENDARS", user });
 }

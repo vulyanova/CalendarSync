@@ -3,7 +3,9 @@
     timer: 0,
     showSummary: false,
     calendar: "primary",
-    calendars: [{"name": "primary", "id": "primary"}]
+    teamUpCalendar: "",
+    calendars: [{"name": "primary", "id": "primary"}],
+    teamUpCalendars: [{"name": "primary", "id": 0}]
 }; 
 
 export const configurations = (state = initialState, action) => {
@@ -19,6 +21,12 @@ export const configurations = (state = initialState, action) => {
                 calendars: action.calendars,
                 calendar: action.calendars[0].id
             }
+        case 'CHANGE_TEAM_UP_CALENDARS':
+                return {
+                    ...state,
+                    teamUpCalendars: action.teamUpCalendars,
+                    teamUpCalendar: action.teamUpCalendars[0].id
+                }
         case 'CHANGE_TIMER':
             return {
                 ...state,
@@ -29,6 +37,11 @@ export const configurations = (state = initialState, action) => {
                 ...state,
                 calendar: action.calendar
             }
+        case 'CHANGE_TEAM_UP_CALENDAR':
+                return {
+                    ...state,
+                    teamUpCalendar: action.teamUpCalendar
+                }
         case 'CHANGE_SUMMARY':
             return {
                 ...state,

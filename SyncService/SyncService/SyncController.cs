@@ -60,7 +60,7 @@ namespace SyncService
             GoogleCalendarAdapter.Authorize(authorizationParams, configuratons.CalendarId);
             var googleCalendar = GoogleCalendarAdapter.GetInstance();
             var outlookCalendar = OutlookCalendarAdapter.GetInstance();
-            var teamUpCalendar = new TeamUpCalendarAdapter("0ad07f8905ca44f73a62048fcf3aaf7c485dec5c036d5647806daa4bb6157b94", "ksjea1t78n1525ka23", 6524793);
+            var teamUpCalendar = new TeamUpCalendarAdapter("0ad07f8905ca44f73a62048fcf3aaf7c485dec5c036d5647806daa4bb6157b94", authorizationParams.CalendarKey, configuratons.TeamUpCalendarId);
 
             if (configuratons.ShowSummary)
                 outlookCalendar.ShowSummary();
