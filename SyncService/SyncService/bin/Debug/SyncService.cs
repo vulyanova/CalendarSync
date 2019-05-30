@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Diagnostics;
 using System.ServiceProcess;
 using System.Timers;
 
@@ -9,6 +10,15 @@ namespace SyncService
         public SyncService()
         {
             InitializeComponent();
+            eventLog1 = new EventLog();
+
+            AutoLog = false;
+
+            if (!EventLog.SourceExists("SyncService"))
+                EventLog.CreateEventSource("SyncService", "MyLog");
+
+            eventLog1.Source = "SyncService";
+            eventLog1.Log = "MyLog";
         }
 
         protected override void OnStart(string[] args)
@@ -33,7 +43,9 @@ namespace SyncService
             timer.Elapsed += (sender, e) => OnTimer(timer, user);
             timer.Interval = configuratons.Timer;
             timer.Enabled = true;
+
             
+            EventLog.WriteEntry("SyncService","Started");
         }
 
         protected override void OnStop()
@@ -45,6 +57,11 @@ namespace SyncService
             timer.Stop();
             SyncController.Sync(user).Wait();
             timer.Start();
+        }
+
+        private void eventLog1_EntryWritten(object sender, EntryWrittenEventArgs e)
+        {
+
         }
     }
 }

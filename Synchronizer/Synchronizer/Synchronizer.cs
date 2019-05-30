@@ -58,6 +58,9 @@ namespace Synchronizer
 
                 if (calendar.Type == CalendarType.Outlook)
                     equalAppointments.Add(calendar.Appointments.Where(gItem => gItem.Id == calendarItem.OutlookId).FirstOrDefault());
+
+                if (calendar.Type == CalendarType.TeamUp)
+                    equalAppointments.Add(calendar.Appointments.Where(gItem => gItem.Id == calendarItem.TeamUpId).FirstOrDefault());
             }
 
             return equalAppointments;

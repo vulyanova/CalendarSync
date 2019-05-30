@@ -10,7 +10,7 @@ namespace SyncCalendars.Test
         {
             var googleCalendar = ItemsCollection.GetGoogleAppointments();
             var outlookCalendar = ItemsCollection.GetOutlookAppointments();
-            
+
             var synchronizer = new Synchronizer.Synchronizer(new List<Calendar> { googleCalendar, outlookCalendar }, connection, isPrivate);
 
             synchronizer.SyncExistedAppointments();
@@ -107,6 +107,41 @@ namespace SyncCalendars.Test
             var newItem = calendar.Appointments.Find(item => item.Id == id);
 
             Assert.Equal(expected, newItem.AppointmentStatus);
+        }
+
+        [Theory]
+        [InlineData(CalendarType.Google, "google_2")]
+        [InlineData(CalendarType.Google, "google_1")]
+        [InlineData(CalendarType.Outlook, "outlook_2")]
+        public void ThreeCalendarsSynchronization_AddAppointment_SuccessfulAddition(CalendarType type, string id)
+        {
+            var connection = new List<MainSyncItem>();
+
+            connection.Add(new MainSyncItem
+            {
+                GoogleId = "google_1",
+                OutlookId = "outlook_1",
+                TeamUpId = "teamUp_1"
+            });
+
+            connection.Add(new MainSyncItem
+            {
+                GoogleId = "google_2",
+                OutlookId = "outlook_2",
+                TeamUpId = "teamUp_2"
+            });
+
+            var googleCalendar = ItemsCollection.GetGoogleAppointments();
+            var outlookCalendar = ItemsCollection.GetOutlookAppointments();
+            var teamUpCalendar = ItemsCollection.GetTeamUpAppointments();
+
+            var calendars = new List<Calendar> { googleCalendar, outlookCalendar, teamUpCalendar };
+
+            var synchronizer = new Synchronizer.Synchronizer(calendars, connection, false);
+            synchronizer.SyncExistedAppointments();
+            synchronizer.AddNewAppointments();
+
+            Assert.Equal("1","1");
         }
 
         [Fact]

@@ -44,6 +44,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Databases\Databases\bin\Debug\Databases.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="SyncCalendarsLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SyncCalendarsLibrary\SyncCalendarsLibrary\bin\Debug\SyncCalendarsLibrary.dll</HintPath>
@@ -108,6 +111,8 @@
     <Compile Include="MongoDbTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SynchronizerTests.cs" />
+    <Compile Include="TeamUpAdapterTests.cs" />
+    <Compile Include="TeamUpCalendarTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

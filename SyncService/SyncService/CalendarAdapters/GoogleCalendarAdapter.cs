@@ -30,24 +30,9 @@ namespace SyncService.CalendarAdapters
             return _instance;
         }
 
-        public async Task UpdateAsync(List<Appointment> appointments)
+        public async Task DeleteAppointmentAsync(Appointment appointment)
         {
-            foreach (var item in appointments)
-            {
-                if (item.AppointmentStatus == Appointment.Status.New)
-                    item.Id = await AddAppointmentAsync(item);
-
-                if (item.AppointmentStatus == Appointment.Status.Deleted)
-                    await DeleteAppointmentAsync(item.Id);
-
-                if (item.AppointmentStatus == Appointment.Status.Changed)
-                    await UpdateAppointmentAsync(item);
-            }
-        }
-
-        public async Task DeleteAppointmentAsync(string id)
-        {
-            await _calendar.DeleteAppointment(_calendarId, id);
+            await _calendar.DeleteAppointment(_calendarId, appointment.Id);
         }
 
         public async Task UpdateAppointmentAsync(Appointment appointment)

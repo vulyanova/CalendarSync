@@ -126,6 +126,7 @@ C:\Projects\SyncService\SyncService\bin\Debug\System.ServiceProcess.ServiceContr
 C:\Projects\SyncService\SyncService\bin\Debug\DnsClient.dll
 C:\Projects\SyncService\SyncService\bin\Debug\System.Buffers.dll
 C:\Projects\SyncService\SyncService\bin\Debug\Calendars.pdb
+C:\Projects\SyncService\SyncService\bin\Debug\Calendars.dll.config
 C:\Projects\SyncService\SyncService\bin\Debug\Databases.pdb
 C:\Projects\SyncService\SyncService\bin\Debug\Databases.dll.config
 C:\Projects\SyncService\SyncService\bin\Debug\Google.Apis.pdb

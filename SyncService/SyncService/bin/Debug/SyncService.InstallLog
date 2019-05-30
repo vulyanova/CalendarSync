@@ -586,3 +586,54 @@ Affected parameters are:
    logtoconsole = 
    logfile = C:\Projects\SyncService\SyncService\bin\Debug\SyncService.InstallLog
    assemblypath = C:\Projects\SyncService\SyncService\bin\Debug\SyncService.exe
+Uninstalling assembly 'C:\Projects\SyncService\SyncService\bin\Debug\SyncService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Projects\SyncService\SyncService\bin\Debug\SyncService.InstallLog
+   assemblypath = C:\Projects\SyncService\SyncService\bin\Debug\SyncService.exe
+Removing EventLog source SyncService.
+Service SyncService is being removed from the system...
+Service SyncService was successfully removed from the system.
+Installing assembly 'C:\Projects\SyncService\SyncService\bin\Debug\SyncService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Projects\SyncService\SyncService\bin\Debug\SyncService.InstallLog
+   assemblypath = C:\Projects\SyncService\SyncService\bin\Debug\SyncService.exe
+Installing service SyncService...
+Service SyncService has been successfully installed.
+Creating EventLog source SyncService in log Application...
+Committing assembly 'C:\Projects\SyncService\SyncService\bin\Debug\SyncService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Projects\SyncService\SyncService\bin\Debug\SyncService.InstallLog
+   assemblypath = C:\Projects\SyncService\SyncService\bin\Debug\SyncService.exe
+Uninstalling assembly 'C:\Projects\SyncService\SyncService\bin\Debug\SyncService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Projects\SyncService\SyncService\bin\Debug\SyncService.InstallLog
+   assemblypath = C:\Projects\SyncService\SyncService\bin\Debug\SyncService.exe
+Removing EventLog source SyncService.
+An exception occurred during the uninstallation of the System.Diagnostics.EventLogInstaller installer.
+System.Security.SecurityException: Requested registry access is not allowed.
+An exception occurred while uninstalling. This exception will be ignored and the uninstall will continue. However, the application might not be fully uninstalled after the uninstall is complete.
+Uninstalling assembly 'C:\Projects\SyncService\SyncService\bin\Debug\SyncService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Projects\SyncService\SyncService\bin\Debug\SyncService.InstallLog
+   assemblypath = C:\Projects\SyncService\SyncService\bin\Debug\SyncService.exe
+Removing EventLog source SyncService.
+Service SyncService is being removed from the system...
+Service SyncService was successfully removed from the system.
+Installing assembly 'C:\Projects\SyncService\SyncService\bin\Debug\SyncService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Projects\SyncService\SyncService\bin\Debug\SyncService.InstallLog
+   assemblypath = C:\Projects\SyncService\SyncService\bin\Debug\SyncService.exe
+Installing service SyncService...
+Service SyncService has been successfully installed.
+Creating EventLog source SyncService in log Application...
+Committing assembly 'C:\Projects\SyncService\SyncService\bin\Debug\SyncService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Projects\SyncService\SyncService\bin\Debug\SyncService.InstallLog
+   assemblypath = C:\Projects\SyncService\SyncService\bin\Debug\SyncService.exe

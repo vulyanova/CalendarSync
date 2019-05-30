@@ -40,12 +40,12 @@ namespace SyncService.CalendarAdapters
             return _instance;
         }
 
-        public async Task DeleteAppointmentAsync(string id)
+        public async Task DeleteAppointmentAsync(Appointment appointment)
         {
             AppointmentItem deleted = null;
             foreach (AppointmentItem item in _items)
             {
-                if (item.GlobalAppointmentID == id)
+                if (item.GlobalAppointmentID == appointment.Id)
                     deleted = item;
             }
 
@@ -159,21 +159,5 @@ namespace SyncService.CalendarAdapters
             _instance = null;
         }
 
-        public async Task UpdateAsync(List<Appointment> appointments)
-        {
-            foreach (var item in appointments)
-            {
-                if (item.AppointmentStatus == Appointment.Status.New)
-                    item.Id = await AddAppointmentAsync(item);
-
-                if (item.AppointmentStatus == Appointment.Status.Deleted)
-                    await DeleteAppointmentAsync(item.Id);
-
-                if (item.AppointmentStatus == Appointment.Status.Changed)
-                    await UpdateAppointmentAsync(item);
-            }
-
-            await Task.CompletedTask;
-        }
     }
 }

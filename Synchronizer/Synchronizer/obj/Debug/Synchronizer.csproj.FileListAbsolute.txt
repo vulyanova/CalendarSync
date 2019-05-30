@@ -102,8 +102,6 @@ C:\Projects\Synchronizer\Synchronizer\bin\Debug\System.Xml.XPath.dll
 C:\Projects\Synchronizer\Synchronizer\bin\Debug\System.Xml.XPath.XDocument.dll
 C:\Projects\Synchronizer\Synchronizer\bin\Debug\Databases.dll
 C:\Projects\Synchronizer\Synchronizer\bin\Debug\DnsClient.dll
-C:\Projects\Synchronizer\Synchronizer\bin\Debug\Google.Apis.Calendar.v3.dll
-C:\Projects\Synchronizer\Synchronizer\bin\Debug\GoogleCalendar.dll
 C:\Projects\Synchronizer\Synchronizer\bin\Debug\MongoDB.Bson.dll
 C:\Projects\Synchronizer\Synchronizer\bin\Debug\MongoDB.Driver.Core.dll
 C:\Projects\Synchronizer\Synchronizer\bin\Debug\MongoDB.Driver.dll
@@ -115,9 +113,6 @@ C:\Projects\Synchronizer\Synchronizer\bin\Debug\Google.Apis.Auth.dll
 C:\Projects\Synchronizer\Synchronizer\bin\Debug\Databases.pdb
 C:\Projects\Synchronizer\Synchronizer\bin\Debug\Databases.dll.config
 C:\Projects\Synchronizer\Synchronizer\bin\Debug\DnsClient.xml
-C:\Projects\Synchronizer\Synchronizer\bin\Debug\Google.Apis.Calendar.v3.pdb
-C:\Projects\Synchronizer\Synchronizer\bin\Debug\Google.Apis.Calendar.v3.xml
-C:\Projects\Synchronizer\Synchronizer\bin\Debug\GoogleCalendar.pdb
 C:\Projects\Synchronizer\Synchronizer\bin\Debug\MongoDB.Bson.xml
 C:\Projects\Synchronizer\Synchronizer\bin\Debug\MongoDB.Driver.xml
 C:\Projects\Synchronizer\Synchronizer\bin\Debug\MongoDB.Driver.Core.xml
@@ -130,4 +125,6 @@ C:\Projects\Synchronizer\Synchronizer\bin\Debug\Newtonsoft.Json.xml
 C:\Projects\Synchronizer\Synchronizer\bin\Debug\Google.Apis.Auth.pdb
 C:\Projects\Synchronizer\Synchronizer\bin\Debug\Google.Apis.Auth.xml
 C:\Projects\Synchronizer\Synchronizer\obj\Debug\Synchronizer.csproj.CopyComplete
+C:\Projects\Synchronizer\Synchronizer\bin\Debug\Calendars.dll
+C:\Projects\Synchronizer\Synchronizer\bin\Debug\Calendars.pdb
 C:\Projects\Synchronizer\Synchronizer\obj\Debug\Synchronizer.csprojAssemblyReference.cache

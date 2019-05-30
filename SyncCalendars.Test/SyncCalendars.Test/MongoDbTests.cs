@@ -27,6 +27,7 @@ namespace SyncCalendars.Test
 
             await Configurations.GetConfigurations(_testUser);
             var configurations = Configurations.GetInstance();
+
             Assert.Equal(expected, configurations.CalendarId);
         }
 
@@ -66,11 +67,11 @@ namespace SyncCalendars.Test
 
             var expected = "googleTest1";
             var syncList = new List<MainSyncItem> {
-            new MainSyncItem()
-            {
-                GoogleId = expected,
-                OutlookId = "outlookTest1"
-            }
+                new MainSyncItem()
+                {
+                    GoogleId = expected,
+                    OutlookId = "outlookTest1"
+                }
             };
 
             await _db.Synchronize(syncList);
@@ -81,8 +82,5 @@ namespace SyncCalendars.Test
 
             Assert.Equal(expected, items[0].GoogleId);
         }
-
-
-
     }
 }

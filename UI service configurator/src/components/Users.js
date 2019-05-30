@@ -15,11 +15,11 @@ const List = ({ items, onItemClick }) => (
 const Users = (props) => {
     if (!props.usersFetched)
         return <div>
-            <button onClick={() => {
-                props.getUsers();
-            }}>
-                Get authorized users
-            </button>
+                <button onClick={() => {
+                    props.getUsers();
+                }}>
+                    Get authorized users
+                </button>
             </div>
     const handleItemClick = (item, e) => {
         const user = item;

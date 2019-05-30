@@ -127,3 +127,11 @@ C:\Projects\Databases\Databases\bin\Debug\Google.Apis.Core.xml
 C:\Projects\Databases\Databases\bin\Debug\Google.Apis.pdb
 C:\Projects\Databases\Databases\bin\Debug\Google.Apis.xml
 C:\Projects\Databases\Databases\bin\Debug\Newtonsoft.Json.xml
+C:\Projects\Databases\Databases\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+C:\Projects\Databases\Databases\bin\Debug\Google.Apis.PlatformServices.dll
+C:\Projects\Databases\Databases\bin\Debug\Calendars.dll.config
+C:\Projects\Databases\Databases\bin\Debug\Google.Apis.Auth.PlatformServices.pdb
+C:\Projects\Databases\Databases\bin\Debug\Google.Apis.Auth.PlatformServices.xml
+C:\Projects\Databases\Databases\bin\Debug\Google.Apis.PlatformServices.pdb
+C:\Projects\Databases\Databases\bin\Debug\Google.Apis.PlatformServices.xml
+C:\Projects\Databases\Databases\obj\Debug\Databases.csprojAssemblyReference.cache

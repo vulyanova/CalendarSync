@@ -78,12 +78,10 @@ namespace SyncCalendars.Test
                 Location = "test"
             };
             var id = await calendar.AddAppointmentAsync(appointment);
+            appointment.Id = id;
+            await calendar.DeleteAppointmentAsync(appointment);
 
-            await calendar.DeleteAppointmentAsync(id);
-
-            Assert.NotNull(id);
-
-            
+            Assert.NotNull(id);       
         }
 
 
@@ -121,7 +119,7 @@ namespace SyncCalendars.Test
             var updatedAppointment = appointments.Find(item => item.Id == id);
     
             Assert.Equal(startDate, updatedAppointment.Date.Start, TimeSpan.FromMinutes(1));
-            await calendar.DeleteAppointmentAsync(id);
+            await calendar.DeleteAppointmentAsync(appointment);
         }
 
     }

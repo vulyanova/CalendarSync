@@ -2,7 +2,9 @@
 using Synchronizer;
 using SyncService.CalendarAdapters;
 using SyncService.DbAdapters.MongoDbAdapter;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -19,9 +21,34 @@ namespace SyncService
             HttpResponseMessage response = await client.GetAsync(path);
             if (response.IsSuccessStatusCode)
             {
-                configs = await response.Content.ReadAsAsync<AuthorizeConfigurations>();
+                try
+                {
+                    configs = await response.Content.ReadAsAsync<AuthorizeConfigurations>();
+                }
+                catch (Exception ex)
+                {
+                    EventLog.WriteEntry("SyncService", "Invalid authorization request response format: "+ ex.Message);
+                }
             }
+            else
+                EventLog.WriteEntry("SyncService", "Authorization request failed:" + response.StatusCode);
+
             return configs;
+        }
+
+        public static async Task UpdateCalendar(ICalendar calendar, List<Appointment> appointments)
+        {
+            foreach (var item in appointments)
+            {
+                if (item.AppointmentStatus == Appointment.Status.New)
+                    item.Id = await calendar.AddAppointmentAsync(item);
+
+                if (item.AppointmentStatus == Appointment.Status.Deleted)
+                    await calendar.DeleteAppointmentAsync(item);
+
+                if (item.AppointmentStatus == Appointment.Status.Changed)
+                    await calendar.UpdateAppointmentAsync(item);
+            }
         }
 
         public static async Task Sync(string user)
@@ -33,6 +60,7 @@ namespace SyncService
             GoogleCalendarAdapter.Authorize(authorizationParams, configuratons.CalendarId);
             var googleCalendar = GoogleCalendarAdapter.GetInstance();
             var outlookCalendar = OutlookCalendarAdapter.GetInstance();
+            var teamUpCalendar = new TeamUpCalendarAdapter("0ad07f8905ca44f73a62048fcf3aaf7c485dec5c036d5647806daa4bb6157b94", "ksjea1t78n1525ka23", 6524793);
 
             if (configuratons.ShowSummary)
                 outlookCalendar.ShowSummary();
@@ -43,6 +71,7 @@ namespace SyncService
             var syncAppointments = await db.GetCalendarItems();
             var googleAppointments = await googleCalendar.GetNearestAppointmentsAsync();
             var outlookAppointments = await outlookCalendar.GetNearestAppointmentsAsync();
+            var teamUpAppointments = await teamUpCalendar.GetNearestAppointmentsAsync();
 
             var calendars = new List<Calendar>
                 {
@@ -56,7 +85,12 @@ namespace SyncService
                     {
                         Appointments = outlookAppointments,
                         Type = CalendarType.Outlook
-                    }
+                    },
+                     new Calendar
+                    {
+                        Appointments = teamUpAppointments,
+                        Type = CalendarType.TeamUp
+                    },
                 };
 
             var synchronizer = new Synchronizer.Synchronizer(calendars, syncAppointments, !configuratons.ShowSummary);
@@ -65,14 +99,16 @@ namespace SyncService
 
             synchronizer.AddNewAppointments();
 
-            await googleCalendar.UpdateAsync(synchronizer.Calendars.Find(item => item.Type == CalendarType.Google).Appointments);
-
-            await outlookCalendar.UpdateAsync(synchronizer.Calendars.Find(item => item.Type == CalendarType.Outlook).Appointments);
+            await UpdateCalendar(googleCalendar, synchronizer.Calendars.Find(item => item.Type == CalendarType.Google).Appointments);
+            await UpdateCalendar(outlookCalendar, synchronizer.Calendars.Find(item => item.Type == CalendarType.Outlook).Appointments);
+            await UpdateCalendar(teamUpCalendar, synchronizer.Calendars.Find(item => item.Type == CalendarType.TeamUp).Appointments);
 
             DbSync.Synchronize(syncAppointments, synchronizer.Calendars);
 
             await db.Synchronize(syncAppointments);
-
         }
+
     }
+   
 }
+

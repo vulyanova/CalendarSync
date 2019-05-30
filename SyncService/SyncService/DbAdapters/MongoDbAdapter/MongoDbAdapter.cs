@@ -35,7 +35,8 @@ namespace SyncService.DbAdapters.MongoDbAdapter
                 result.Add(new MainSyncItem
                 {
                     GoogleId = item.GoogleId,
-                    OutlookId = item.OutlookId
+                    OutlookId = item.OutlookId,
+                    TeamUpId = item.TeamUpId
                 });
             }
             return result;

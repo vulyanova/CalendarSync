@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Calendars.dll" size="11264">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Calendars.dll" size="29184">
       <assemblyIdentity name="Calendars" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>q4p/iydSqfat3GQYrNwt1lQ9dnau5DQ9p0gakKXrea4=</dsig:DigestValue>
+        <dsig:DigestValue>caHBVWJW3ZhzLNvIITLjgBQKn/yKyxTKD2V7Bhxi+LM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -229,19 +229,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ArVj90bohSwtliTci0tUV4xjmiVlmuUsHgF5SY7vHZo=</dsig:DigestValue>
+        <dsig:DigestValue>3npVXoWWcWE7v15f9CVC8XdAuaRyEQU6wgb2LMzZJYc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SyncService.exe" size="45056">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SyncService.exe" size="49664">
       <assemblyIdentity name="SyncService" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>DX9GbSIBT9sVVvLx2n844RDQ+8BhqopF5v/YJPJcfXk=</dsig:DigestValue>
+        <dsig:DigestValue>cRTmVKUgCmoa8IxybQC+Ichk4BzQdSMns4KEsiWB3ec=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1469,13 +1469,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="SyncService.exe.config" size="20704">
+  <file name="SyncService.exe.config" size="21393">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>7+on7pSR7FX8jlEji5he4hn3iJvYWtrNeIjgHC/vGjo=</dsig:DigestValue>
+      <dsig:DigestValue>nScCabCc0cSgAeYhXIprYqYuiL0UVb8EBv85EjCBNNg=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">

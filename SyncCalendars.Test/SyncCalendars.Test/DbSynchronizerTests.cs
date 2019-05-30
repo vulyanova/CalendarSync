@@ -100,5 +100,6 @@ namespace SyncCalendars.Test
                 Assert.NotNull(existedItems.Where(connection =>
                 connection.GoogleId == item.GoogleId && connection.OutlookId == item.OutlookId));
         }
+
     }
 }

@@ -4,5 +4,6 @@
     {
         public string GoogleId;
         public string OutlookId;
+        public string TeamUpId;
     }
 }

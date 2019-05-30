@@ -1,6 +1,5 @@
 ﻿using Synchronizer;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace SyncService
 {
@@ -15,6 +14,9 @@ namespace SyncService
                     break;
                 case CalendarType.Outlook:
                     item.OutlookId = id;
+                    break;
+                case CalendarType.TeamUp:
+                    item.TeamUpId = id;
                     break;
             }
         }

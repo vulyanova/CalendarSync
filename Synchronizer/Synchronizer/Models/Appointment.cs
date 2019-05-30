@@ -9,6 +9,7 @@ namespace Synchronizer
 
         public string Id { get; set; }
         public string Subject { get; set; }
+        public string Version { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }
         public AppointmentDate Date { get; set; }

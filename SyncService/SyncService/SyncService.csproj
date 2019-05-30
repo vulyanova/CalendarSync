@@ -66,6 +66,7 @@
     <Compile Include="CalendarAdapters\GoogleCalendarAdapter.cs" />
     <Compile Include="CalendarAdapters\ICalendar.cs" />
     <Compile Include="CalendarAdapters\OutlookCalendarAdapter.cs" />
+    <Compile Include="CalendarAdapters\TeamUpCalendarAdapter.cs" />
     <Compile Include="Configs.cs" />
     <Compile Include="Configurations.cs" />
     <Compile Include="DbAdapters\IDbInteraction.cs" />

@@ -2,7 +2,7 @@
 
 namespace Synchronizer
 {
-    public enum CalendarType { Google, Outlook };
+    public enum CalendarType { Google, Outlook, TeamUp };
 
     public class Calendar
     {
