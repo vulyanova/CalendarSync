@@ -32,7 +32,6 @@ export const changeSummary = (showSummary) => ({
     showSummary
 })
 
-
 export const startAuthorizing = () => ({
     type: 'START_AUTHORIZING'
 })

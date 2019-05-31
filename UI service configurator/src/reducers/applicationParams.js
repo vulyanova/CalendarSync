@@ -17,22 +17,7 @@ export const applicationParams = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: true
-            }
-        case 'GET_CALENDARS':
-            return {
-                ...state,
-                isLoading: true
-            }
-        case 'GET_TEAM_UP_CALENDARS':
-                return {
-                    ...state,
-                    isLoading: true
-                }
-        case 'GET_TIMERS':
-            return {
-                ...state,
-                isLoading: true
-            }
+            }     
         case 'GET_USERS':
             return {
                 ...state,
@@ -72,11 +57,6 @@ export const applicationParams = (state = initialState, action) => {
             return {
                 ...state,
                 usersFetched: true
-            }
-        case 'START_SERVICE':
-            return {
-                ...state,
-                isLoading: true
             }
         case 'GET_CONFIGS_DATA':
             return {
