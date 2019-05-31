@@ -3,8 +3,9 @@ import Users from '../components/Users';
 import {
     getUsers,
     changeUser,
+    getConfigsData,
     stopAuthorizing,
-    getCalendars
+    successLoading
 } from '../actions';
 
 const mapStateToProps = (state) => ({
@@ -16,8 +17,9 @@ const mapDispatchToProps = dispatch => {
     return {
         getUsers: () => dispatch(getUsers()),
         stopAuthorizing: () => dispatch(stopAuthorizing()),
+        successLoading: () => dispatch(successLoading()),
         changeUser: (user) => dispatch(changeUser(user)),
-        getCalendars: (user) => dispatch(getCalendars(user)),
+        getConfigsData: (user) => dispatch(getConfigsData(user)),
     }
 }
 

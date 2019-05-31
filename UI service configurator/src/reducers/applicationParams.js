@@ -78,6 +78,11 @@ export const applicationParams = (state = initialState, action) => {
                 ...state,
                 isLoading: true
             }
+        case 'GET_CONFIGS_DATA':
+            return {
+                ...state,
+                isLoading: true
+            }
         default:
             return state;
     }

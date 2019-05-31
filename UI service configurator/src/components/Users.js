@@ -24,8 +24,7 @@ const Users = (props) => {
     const handleItemClick = (item, e) => {
         const user = item;
         props.changeUser(user);
-        props.stopAuthorizing();
-        props.getCalendars(user);
+        props.getConfigsData(user);
     }
     return <List items={props.users} onItemClick={handleItemClick} />
 }

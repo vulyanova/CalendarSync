@@ -102,4 +102,12 @@ export const changeTeamUpCalendar = (teamUpCalendar) => ({
     type: "CHANGE_TEAM_UP_CALENDAR",
     teamUpCalendar
 })
+export const getConfigsData = (user) => ({
+     type: "GET_CONFIGS_DATA", 
+     user 
+});
+
+export const successLoading = () => ({
+    type: "SUCCESS_LOADING"
+});
 
