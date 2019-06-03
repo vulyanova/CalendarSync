@@ -33,6 +33,7 @@ namespace SyncCalendars.Test
             GoogleCalendarAdapter.Authorize(authorizeConfigs, _calendarId);
             var googleCalendar = GoogleCalendarAdapter.GetInstance();
             var outlookCalendar =OutlookCalendarAdapter.GetInstance();
+            outlookCalendar.ChangeCalendar("calendar for tests");
 
             var list =  new List<ICalendar>
             {
@@ -78,8 +79,6 @@ namespace SyncCalendars.Test
                 Location = "test"
             };
             var id = await calendar.AddAppointmentAsync(appointment);
-            appointment.Id = id;
-            await calendar.DeleteAppointmentAsync(appointment);
 
             Assert.NotNull(id);       
         }
@@ -119,7 +118,7 @@ namespace SyncCalendars.Test
             var updatedAppointment = appointments.Find(item => item.Id == id);
     
             Assert.Equal(startDate, updatedAppointment.Date.Start, TimeSpan.FromMinutes(1));
-            await calendar.DeleteAppointmentAsync(appointment);
+
         }
 
     }

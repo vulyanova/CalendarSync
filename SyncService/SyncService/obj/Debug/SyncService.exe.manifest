@@ -234,14 +234,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SyncService.exe" size="49664">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SyncService.exe" size="50688">
       <assemblyIdentity name="SyncService" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>M7h630XA1HQ2ErPUGRvTVYSioXkAs21CFEg4akbZUic=</dsig:DigestValue>
+        <dsig:DigestValue>EC4z7WQB8Y/c1Lj7293Pk0eedhulN6A2ZettQqiLRe8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

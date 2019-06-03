@@ -59,6 +59,9 @@ namespace SyncService.CalendarAdapters
             var appointments = await _calendar.GetNearestAppointments();
             foreach(var teamUpAppointment in appointments)
             {
+                var attendees = teamUpAppointment.Who.Split(',').ToList();
+                attendees?.Sort();
+
                 var appointment = new Appointment
                 {
                     Id = teamUpAppointment.Id,
@@ -67,7 +70,7 @@ namespace SyncService.CalendarAdapters
                     Updated = teamUpAppointment.Update,
                     Version = teamUpAppointment.Version,
                     Subject = teamUpAppointment.Title,
-                    Attendees = teamUpAppointment.Who!=string.Empty?teamUpAppointment.Who.Split(',').ToList(): new List<string>(),
+                    Attendees = attendees!= null?attendees: new List<string>(),
                     Description = teamUpAppointment.Description,
                 };
 

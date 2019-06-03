@@ -11,20 +11,31 @@ namespace SyncService.CalendarAdapters
         private static OutlookCalendarAdapter _instance;
         private Application _oApp;
         private NameSpace _mapiNS;
+        private MAPIFolder _calendarFolder;
         private List<AppointmentItem> _items;
         private bool _showSummary ;
-
+        
         private OutlookCalendarAdapter()
         {
             _oApp = new Application();
             _mapiNS = _oApp.GetNamespace("MAPI");
             _items = new List<AppointmentItem>();
             _showSummary = true;
+            var CurrentFolder = _mapiNS.GetDefaultFolder(OlDefaultFolders.olFolderCalendar);
+
+            _calendarFolder = CurrentFolder;
         }
 
         public void ShowSummary()
         {
             _showSummary = true;
+        }
+
+        public void ChangeCalendar(string calendar)
+        {
+            var CurrentFolder = _mapiNS.GetDefaultFolder(OlDefaultFolders.olFolderCalendar);
+
+            _calendarFolder = CurrentFolder.Folders[calendar];
         }
 
         public void HideSummary()
@@ -59,8 +70,7 @@ namespace SyncService.CalendarAdapters
 
         public async Task<List<Appointment>> GetNearestAppointmentsAsync()
         {
-            var CalendarFolder = _mapiNS.GetDefaultFolder(OlDefaultFolders.olFolderCalendar);
-            var items = CalendarFolder.Items;
+            var items = _calendarFolder.Items;
 
             var startDate = DateTime.Now;
             var endDate = startDate.AddMonths(1);
@@ -127,7 +137,7 @@ namespace SyncService.CalendarAdapters
             string profile = "";
             _mapiNS.Logon(profile, null, null, null);
 
-            var item = (AppointmentItem)_oApp.CreateItem(OlItemType.olAppointmentItem);
+            var item = (AppointmentItem)_oApp.CreateItem(OlItemType.olAppointmentItem).Move(_calendarFolder); 
 
             var attendees = "";
             foreach (var attendee in appointment.Attendees)
@@ -139,9 +149,10 @@ namespace SyncService.CalendarAdapters
             item.Start = appointment.Date.Start;
             item.End = appointment.Date.End;
             item.RequiredAttendees = attendees;
-
             item.Save();
             item.Send();
+
+
             var id = item.GlobalAppointmentID;
 
             _items.Add(item);
