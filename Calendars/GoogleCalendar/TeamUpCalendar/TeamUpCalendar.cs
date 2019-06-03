@@ -10,15 +10,14 @@ namespace Calendars.TeamUpCalendar
 {
     public class TeamUpCalendar
     {
-        public string ApiKey { get; private set; }
+        private readonly string _apiKey = "0ad07f8905ca44f73a62048fcf3aaf7c485dec5c036d5647806daa4bb6157b94";
         public string CalendarKey { get; private set; }
         public int CalendarId;
         private readonly HttpClient client = new HttpClient();
         public readonly string Url = "https://api.teamup.com/";
 
-        public TeamUpCalendar(string apiKey, string calendarKey, int calendarId)
+        public TeamUpCalendar(string calendarKey, int calendarId)
         {
-            ApiKey = apiKey;
             CalendarKey = calendarKey;
             CalendarId = calendarId;
         }
@@ -42,7 +41,7 @@ namespace Calendars.TeamUpCalendar
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(Url + CalendarKey + "/events"),
                 Headers = {
-                {"Teamup-Token", ApiKey}
+                {"Teamup-Token", _apiKey}
             },
                 Content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json")
             };
@@ -76,7 +75,7 @@ namespace Calendars.TeamUpCalendar
                 Method = HttpMethod.Put,
                 RequestUri = new Uri(Url + CalendarKey + "/events/"+appointment.Id),
                 Headers = {
-                {"Teamup-Token", ApiKey}
+                {"Teamup-Token", _apiKey}
             },
                 Content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json")
             };
@@ -95,7 +94,7 @@ namespace Calendars.TeamUpCalendar
                 Method = HttpMethod.Delete,
                 RequestUri = new Uri(Url + CalendarKey + "/events/" + appointment.Id+ "?version="+appointment.Version+"&redit=all"),
                 Headers = {
-                {"Teamup-Token", ApiKey}
+                {"Teamup-Token", _apiKey}
             }
             };
 
@@ -112,7 +111,7 @@ namespace Calendars.TeamUpCalendar
             webRequest.Method = "GET";
             webRequest.Timeout = 12000;
             webRequest.ContentType = "application/json";
-            webRequest.Headers.Add("Teamup-Token", ApiKey);
+            webRequest.Headers.Add("Teamup-Token", _apiKey);
 
             var response = await webRequest.GetResponseAsync();
             using (System.IO.Stream s = response.GetResponseStream())

@@ -10,9 +10,9 @@ namespace SyncService.CalendarAdapters
     {
         private TeamUpCalendar _calendar;
 
-        public TeamUpCalendarAdapter(string apiKey, string calendarKey, int calendarId)
+        public TeamUpCalendarAdapter(string calendarKey, int calendarId)
         {
-            _calendar = new TeamUpCalendar(apiKey, calendarKey, calendarId);
+            _calendar = new TeamUpCalendar(calendarKey, calendarId);
         }
         public async Task<string> AddAppointmentAsync(Appointment appointment)
         {

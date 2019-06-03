@@ -60,11 +60,12 @@ namespace SyncService
             GoogleCalendarAdapter.Authorize(authorizationParams, configuratons.CalendarId);
             var googleCalendar = GoogleCalendarAdapter.GetInstance();
             var outlookCalendar = OutlookCalendarAdapter.GetInstance();
-            var teamUpCalendar = new TeamUpCalendarAdapter("0ad07f8905ca44f73a62048fcf3aaf7c485dec5c036d5647806daa4bb6157b94", authorizationParams.CalendarKey, configuratons.TeamUpCalendarId);
+            var teamUpCalendar = new TeamUpCalendarAdapter(authorizationParams.CalendarKey, configuratons.TeamUpCalendarId);
 
             if (configuratons.ShowSummary)
                 outlookCalendar.ShowSummary();
-            else outlookCalendar.HideSummary();
+            else
+                outlookCalendar.HideSummary();
             
             var db = new MongoDbAdapter(user);
 
@@ -80,7 +81,6 @@ namespace SyncService
                         Appointments = googleAppointments,
                         Type = CalendarType.Google
                     },
-
                     new Calendar
                     {
                         Appointments = outlookAppointments,

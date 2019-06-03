@@ -127,4 +127,11 @@ C:\Projects\Synchronizer\Synchronizer\bin\Debug\Google.Apis.Auth.xml
 C:\Projects\Synchronizer\Synchronizer\obj\Debug\Synchronizer.csproj.CopyComplete
 C:\Projects\Synchronizer\Synchronizer\bin\Debug\Calendars.dll
 C:\Projects\Synchronizer\Synchronizer\bin\Debug\Calendars.pdb
+C:\Projects\Synchronizer\Synchronizer\bin\Debug\Google.Apis.Auth.PlatformServices.dll
+C:\Projects\Synchronizer\Synchronizer\bin\Debug\Google.Apis.PlatformServices.dll
+C:\Projects\Synchronizer\Synchronizer\bin\Debug\Calendars.dll.config
+C:\Projects\Synchronizer\Synchronizer\bin\Debug\Google.Apis.Auth.PlatformServices.pdb
+C:\Projects\Synchronizer\Synchronizer\bin\Debug\Google.Apis.Auth.PlatformServices.xml
+C:\Projects\Synchronizer\Synchronizer\bin\Debug\Google.Apis.PlatformServices.pdb
+C:\Projects\Synchronizer\Synchronizer\bin\Debug\Google.Apis.PlatformServices.xml
 C:\Projects\Synchronizer\Synchronizer\obj\Debug\Synchronizer.csprojAssemblyReference.cache

@@ -49,7 +49,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>5IlXm0E+3sM8UVevuvf5uSE4DwT9VgprSxnnzr9afWE=</dsig:DigestValue>
+        <dsig:DigestValue>ako98qwCeXw7JkGADx6Q0D5lkkf9SL8S2i2bSdLuRdw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -222,26 +222,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Synchronizer.dll" size="10752">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Synchronizer.dll" size="11264">
       <assemblyIdentity name="Synchronizer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>3npVXoWWcWE7v15f9CVC8XdAuaRyEQU6wgb2LMzZJYc=</dsig:DigestValue>
+        <dsig:DigestValue>UU1OzisNP2TYRbRHoIwrziBcZannKkKNzDMiKyTR5K8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SyncService.exe" size="50176">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SyncService.exe" size="49664">
       <assemblyIdentity name="SyncService" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>XyWh3xU74uSND7UBpc9JXE4Oiiuz3ns61gs2RbIi/sE=</dsig:DigestValue>
+        <dsig:DigestValue>M7h630XA1HQ2ErPUGRvTVYSioXkAs21CFEg4akbZUic=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

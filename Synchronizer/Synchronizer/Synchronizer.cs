@@ -7,7 +7,7 @@ namespace Synchronizer
     {
         public List<Calendar> Calendars { get; set; }
         private List<MainSyncItem> _existedAppointments;
-        private bool _isPrivate;
+        private readonly bool _isPrivate;
 
         public Synchronizer(List<Calendar> calendars, List<MainSyncItem> database, bool isPrivate)
         {
@@ -75,7 +75,7 @@ namespace Synchronizer
                     if (appointment.AppointmentStatus == Appointment.Status.Unchecked)
                     {
                         appointment.AppointmentStatus = Appointment.Status.Checked;
-
+                       
                         AddAppointment(appointment, calendar.Type);
                     }
                 }
@@ -85,10 +85,8 @@ namespace Synchronizer
         private void AddAppointment(Appointment appointment, CalendarType type)
         {
             foreach (var calendar in Calendars)
-            {
                 if (calendar.Type != type)
                     calendar.Appointments.Add(CreateAppointment(appointment));
-            }
         }
 
         private static Appointment CreateAppointment(Appointment appointment)
