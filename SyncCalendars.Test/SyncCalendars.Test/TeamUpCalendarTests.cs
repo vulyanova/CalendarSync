@@ -11,7 +11,7 @@ namespace SyncCalendars.Test
         [Fact]
         public async Task NewAppointments_AddCorrectAmountAsync()
         {
-            var teamUpCalendar = new TeamUpCalendar("0ad07f8905ca44f73a62048fcf3aaf7c485dec5c036d5647806daa4bb6157b94", "ksjea1t78n1525ka23", 6524793);
+            var teamUpCalendar = new TeamUpCalendar("ksjea1t78n1525ka23", 6524793);
 
             var start = DateTime.Now.AddDays(1);
             var appointment = new TeamUpEvent
