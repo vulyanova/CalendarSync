@@ -15,8 +15,9 @@ namespace SyncCalendars.Test
         private static readonly string _user = "chuvaginavika@gmail.com";
         private static readonly string _accessToken = "ya29.GlsLB7S9TXLIc3MV3JbSKhuMsOk0YEK6q1ZHwHhCpQrl4fzK5XOf6eM_I_ciDUDNFMwUr_imnnz0Z46DUCEAuEqEvamBAJVZztzQjD_ZYBZihp_6MMkXIT1KGB58";
         private static readonly string _refreshToken = "1/D6GIPCOLJBCAWjTE5U92v14GqK9hlKKA_1x7LA7HFFk";
-        private static readonly string _calendarId = "9c2pflnloasdoiesmndgi6aej0@group.calendar.google.com";
+        private static readonly string _calendarId = "l9b4t4broehnafqhemo2b264ho@group.calendar.google.com";
         private static readonly string _subject = "calendarTest";
+        private static readonly string _outlookCalendarName = "calendar for tests";
 
         private static readonly AuthorizeConfigurations authorizeConfigs = new AuthorizeConfigurations
         {
@@ -33,12 +34,14 @@ namespace SyncCalendars.Test
             GoogleCalendarAdapter.Authorize(authorizeConfigs, _calendarId);
             var googleCalendar = GoogleCalendarAdapter.GetInstance();
             var outlookCalendar =OutlookCalendarAdapter.GetInstance();
-            outlookCalendar.ChangeCalendar("calendar for tests");
+            var teamUpCalendar = new TeamUpCalendarAdapter("ksjea1t78n1525ka23", 6551483);
+            outlookCalendar.ChangeCalendar(_outlookCalendarName);
 
             var list =  new List<ICalendar>
             {
                 googleCalendar,
-                outlookCalendar
+                outlookCalendar,
+                teamUpCalendar
             };
 
             return list[index];
@@ -47,6 +50,7 @@ namespace SyncCalendars.Test
         [Theory]
         [InlineData(0)]
         [InlineData(1)]
+        [InlineData(2)]
         public async Task CalendarsAppointments_GetNearestEvents_CorrectRangeOfEvents(int index)
         {
             var calendar = GetCalendar(index);
@@ -63,6 +67,7 @@ namespace SyncCalendars.Test
         [Theory]
         [InlineData(0)]
         [InlineData(1)]
+        [InlineData(2)]
         public async Task CalendarsAppointments_AddEvent_SuccessfullAddition(int index)
         {
             var calendar = GetCalendar(index);
@@ -87,6 +92,7 @@ namespace SyncCalendars.Test
         [Theory]
         [InlineData(0)]
         [InlineData(1)]
+        [InlineData(2)]
         public async Task CalendarsAppointments_UpdateEventTime_SuccessfullUpdating(int index)
         {
             var calendar = GetCalendar(index);

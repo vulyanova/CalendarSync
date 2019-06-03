@@ -111,7 +111,6 @@
     <Compile Include="MongoDbTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SynchronizerTests.cs" />
-    <Compile Include="TeamUpAdapterTests.cs" />
     <Compile Include="TeamUpCalendarTests.cs" />
   </ItemGroup>
   <ItemGroup>
