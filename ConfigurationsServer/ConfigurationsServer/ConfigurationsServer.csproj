@@ -23,6 +23,9 @@
     <Reference Include="Databases">
       <HintPath>..\..\Databases\Databases\bin\Debug\Databases.dll</HintPath>
     </Reference>
+    <Reference Include="Synchronizer">
+      <HintPath>..\..\Synchronizer\Synchronizer\bin\Debug\Synchronizer.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

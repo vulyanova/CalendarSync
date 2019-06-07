@@ -3,6 +3,7 @@ using Synchronizer;
 using SyncService.CalendarAdapters;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -61,7 +62,7 @@ namespace SyncCalendars.Test
             var appointments = await calendar.GetNearestAppointmentsAsync();
 
             foreach (var appointment in appointments)
-                Assert.InRange(appointment.Date.Start, startDate, endDate);
+                Assert.InRange(appointment.Date.End, startDate, endDate);
         }
 
         [Theory]
@@ -72,6 +73,9 @@ namespace SyncCalendars.Test
         {
             var calendar = GetCalendar(index);
 
+            var firstAttendee = "chuvaginavika@gmail.com";
+            var secondAttendee = "chuvaginavika@icloud.com";
+
             var startDate = DateTime.Now.AddDays(1);
             var endDate = startDate.AddHours(1);
             
@@ -80,12 +84,16 @@ namespace SyncCalendars.Test
                 Subject = _subject,
                 Description = "test",
                 Date = new AppointmentDate(startDate, endDate),
-                Attendees = new List<string>(),
+                Attendees = new List<string> {secondAttendee, firstAttendee },
                 Location = "test"
             };
+
             var id = await calendar.AddAppointmentAsync(appointment);
 
-            Assert.NotNull(id);       
+            var appointments = await calendar.GetNearestAppointmentsAsync();
+            var newApp = appointments.Where(item =>item.Id==id && item.Attendees[0] == firstAttendee && item.Attendees[1] == secondAttendee);
+
+            Assert.Single(newApp);       
         }
 
 

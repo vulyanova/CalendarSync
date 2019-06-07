@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using MongoDB.Driver;
+using System.Configuration;
 using System.Diagnostics;
 using System.ServiceProcess;
 using System.Timers;
@@ -37,10 +38,14 @@ namespace SyncService
 
             Configurations.GetConfigurations(user).Wait();
 
+            var client = new MongoClient("mongodb+srv://newadmin:02072012@calendarcluster-tjsbr.gcp.mongodb.net/test?retryWrites=true");
+            var database = client.GetDatabase("SyncConfigurations");
+            var collection = database.GetCollection<Log>("History");
+
             var configuratons = Configurations.GetInstance();
 
             var timer = new Timer();
-            timer.Elapsed += (sender, e) => OnTimer(timer, user);
+            timer.Elapsed += (sender, e) => OnTimer(timer, user, collection);
             timer.Interval = configuratons.Timer;
             timer.Enabled = true;
 
@@ -52,10 +57,10 @@ namespace SyncService
         {
         }
 
-        public void OnTimer(Timer timer, string user)
+        public void OnTimer(Timer timer, string user, IMongoCollection<Log> logCollection)
         {
             timer.Stop();
-            SyncController.Sync(user).Wait();
+            SyncController.Sync(user, logCollection).Wait();
             timer.Start();
         }
 

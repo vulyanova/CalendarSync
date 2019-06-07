@@ -17,17 +17,23 @@ namespace Synchronizer
         public DateTime Updated { get; set; }
         public Status AppointmentStatus { get; set; } = Status.Unchecked;
         public string CreatorId { get; set; }
+        public Appointment PreviousState { get; private set; }
 
         public bool Equals(Appointment appointment, bool isPrivate)
         {
-            bool isEqualPrivateFields;
-            if (isPrivate) isEqualPrivateFields = true;
-            else isEqualPrivateFields = (Subject == appointment.Subject && Description == appointment.Description);
+            bool areEqualPrivateFields;
 
-            if (isEqualPrivateFields &&
+            if (isPrivate)
+                areEqualPrivateFields = true;
+            else
+                areEqualPrivateFields = (Subject == appointment.Subject && Description == appointment.Description);
+
+            bool isEqualAppointment = areEqualPrivateFields &&
                 Location == appointment.Location &&
                 Date.Equals(appointment.Date) &&
-                EqualAttendees(Attendees, appointment.Attendees))
+                EqualAttendees(Attendees, appointment.Attendees);
+
+            if (isEqualAppointment)
                 return true;
 
             return false;
@@ -47,6 +53,15 @@ namespace Synchronizer
 
         public void Update(Appointment appointment)
         {
+            PreviousState = new Appointment
+            {
+                Subject = Subject,
+                Description = Description,
+                Location = Location,
+                Attendees = Attendees,
+                Date = new AppointmentDate(Date.Start, Date.End)
+            };
+
             Subject = appointment.Subject;
             Description = appointment.Description;
             Location = appointment.Location;

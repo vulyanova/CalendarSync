@@ -14,6 +14,13 @@ const Authorize = (props) => {
             }}>
                 Authorize
             </button>
+
+            <button onClick={() => {
+                const user = "vika";
+                props.getHistory(user);
+            }}>
+                Get History
+            </button>
         </div>
     )
 }

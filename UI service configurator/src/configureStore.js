@@ -2,13 +2,20 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { authorizationParams } from './reducers/authorizationParams';
 import { applicationParams } from './reducers/applicationParams';
 import { timers } from './reducers/timers';
+import { history } from './reducers/history';
 import { configurations } from './reducers/configurations';
 import createSagaMiddleware from 'redux-saga';
 import { initSagas } from './initSagas'
 
 const configureStore = () => {
 
-    const reducers = combineReducers({ authorizationParams, configurations, applicationParams, timers});
+    const reducers = combineReducers({ 
+        authorizationParams, 
+        configurations, 
+        applicationParams, 
+        timers, 
+        history
+    });
     const sagaMiddleware = createSagaMiddleware();
 
     const store = createStore(

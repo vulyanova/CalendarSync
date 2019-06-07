@@ -135,7 +135,7 @@ namespace Calendars.TeamUpCalendar
                                 End = appointment.end_dt,
                                 Version = appointment.version,
                                 Title = appointment.title,
-                                Update = appointment.update_dt != null ? appointment.update_dt : appointment.creation_dt
+                                Update = appointment.update_dt ?? appointment.creation_dt
                             };
 
                             list.Add(teamUpEvent);

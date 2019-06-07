@@ -55,22 +55,25 @@ namespace SyncService.CalendarAdapters
         public async Task<List<Appointment>> GetNearestAppointmentsAsync()
         {
             var result = new List<Appointment>();
-
             var appointments = await _calendar.GetNearestAppointments();
+
             foreach(var teamUpAppointment in appointments)
             {
-                var attendees = teamUpAppointment.Who.Split(',').ToList();
-                attendees?.Sort();
+                var attendees = new List<string>();
+                if (teamUpAppointment.Who != string.Empty)
+                    attendees = teamUpAppointment.Who.Split(',').ToList();
+
+                var attendeesEmail = attendees.Where(item=> item.Contains("@")).Select(s => s.Trim()).OrderBy(item=> item).ToList();
 
                 var appointment = new Appointment
                 {
                     Id = teamUpAppointment.Id,
-                    Location = teamUpAppointment.Location,
+                    Location = teamUpAppointment.Location == string.Empty ? null : teamUpAppointment.Location,
                     Date = new AppointmentDate(teamUpAppointment.Start, teamUpAppointment.End),
                     Updated = teamUpAppointment.Update,
                     Version = teamUpAppointment.Version,
                     Subject = teamUpAppointment.Title,
-                    Attendees = attendees!= null?attendees: new List<string>(),
+                    Attendees = attendeesEmail,
                     Description = teamUpAppointment.Description,
                 };
 

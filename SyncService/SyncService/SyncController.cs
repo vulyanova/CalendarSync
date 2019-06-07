@@ -1,4 +1,5 @@
 ﻿using Calendars;
+using MongoDB.Driver;
 using Synchronizer;
 using SyncService.CalendarAdapters;
 using SyncService.DbAdapters.MongoDbAdapter;
@@ -13,6 +14,7 @@ namespace SyncService
     public static class SyncController
     {
         static readonly string url = "https://localhost:5001/api/authorize/";
+        private static IMongoCollection<Log> _logCollection;
 
         static async Task<AuthorizeConfigurations> GetAuthorizationConfigurationsAsync(string path)
         {
@@ -36,10 +38,15 @@ namespace SyncService
             return configs;
         }
 
-        public static async Task UpdateCalendar(ICalendar calendar, List<Appointment> appointments)
+        private static async Task UpdateCalendar(string user, ICalendar calendar, Calendar appointmentCalendar)
         {
+            var appointments = appointmentCalendar.Appointments;
+
             foreach (var item in appointments)
             {
+                if (item.AppointmentStatus == Appointment.Status.Checked)
+                    continue;
+
                 if (item.AppointmentStatus == Appointment.Status.New)
                     item.Id = await calendar.AddAppointmentAsync(item);
 
@@ -48,11 +55,16 @@ namespace SyncService
 
                 if (item.AppointmentStatus == Appointment.Status.Changed)
                     await calendar.UpdateAppointmentAsync(item);
+
+                var log = new Log(user, item.AppointmentStatus, appointmentCalendar.Type, item);
+
+                await _logCollection.InsertOneAsync(log);
             }
         }
 
-        public static async Task Sync(string user)
+        public static async Task Sync(string user, IMongoCollection<Log> logCollection)
         {
+            _logCollection = logCollection;
             var authorizationParams = await GetAuthorizationConfigurationsAsync(url+user);
 
             var configuratons = Configurations.GetInstance();
@@ -99,9 +111,9 @@ namespace SyncService
 
             synchronizer.AddNewAppointments();
 
-            await UpdateCalendar(googleCalendar, synchronizer.Calendars.Find(item => item.Type == CalendarType.Google).Appointments);
-            await UpdateCalendar(outlookCalendar, synchronizer.Calendars.Find(item => item.Type == CalendarType.Outlook).Appointments);
-            await UpdateCalendar(teamUpCalendar, synchronizer.Calendars.Find(item => item.Type == CalendarType.TeamUp).Appointments);
+            await UpdateCalendar(user, googleCalendar, synchronizer.Calendars.Find(item => item.Type == CalendarType.Google));
+            await UpdateCalendar(user, outlookCalendar, synchronizer.Calendars.Find(item => item.Type == CalendarType.Outlook));
+            await UpdateCalendar(user, teamUpCalendar, synchronizer.Calendars.Find(item => item.Type == CalendarType.TeamUp));
 
             DbSync.Synchronize(syncAppointments, synchronizer.Calendars);
 

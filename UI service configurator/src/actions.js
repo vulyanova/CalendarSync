@@ -110,3 +110,15 @@ export const successLoading = () => ({
     type: "SUCCESS_LOADING"
 });
 
+export const getHistory = (user) => ({
+    type: "GET_HISTORY",
+    user: user
+});
+
+export const changeHistoryState = () => ({
+    type: "CHANGE_HISTORY_STATE"
+});
+
+
+
+

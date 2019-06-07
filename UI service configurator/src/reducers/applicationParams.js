@@ -63,6 +63,11 @@ export const applicationParams = (state = initialState, action) => {
                 ...state,
                 isLoading: true
             }
+        case 'GET_HISTORY':
+            return {
+                ...state,
+                isLoading: true
+            }
         default:
             return state;
     }

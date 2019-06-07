@@ -73,6 +73,7 @@
     <Compile Include="DbAdapters\MongoDbAdapter\MongoDbAdapter.cs" />
     <Compile Include="DbAdapters\MongoDbAdapter\MongoItem.cs" />
     <Compile Include="DbSync.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
     </Compile>

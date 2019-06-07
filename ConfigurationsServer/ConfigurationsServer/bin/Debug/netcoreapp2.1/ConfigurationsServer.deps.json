@@ -31,7 +31,8 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.1",
           "MongoDB.Driver": "2.8.0",
           "Calendars": "1.0.0.0",
-          "Databases": "1.0.0.0"
+          "Databases": "1.0.0.0",
+          "Synchronizer": "1.0.0.0"
         },
         "runtime": {
           "ConfigurationsServer.dll": {}
@@ -982,6 +983,17 @@
         },
         "compile": {
           "Databases.dll": {}
+        }
+      },
+      "Synchronizer/1.0.0.0": {
+        "runtime": {
+          "Synchronizer.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "compile": {
+          "Synchronizer.dll": {}
         }
       },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -4292,6 +4304,11 @@
       "sha512": ""
     },
     "Databases/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Synchronizer/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

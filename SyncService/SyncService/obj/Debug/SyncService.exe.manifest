@@ -229,19 +229,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>UU1OzisNP2TYRbRHoIwrziBcZannKkKNzDMiKyTR5K8=</dsig:DigestValue>
+        <dsig:DigestValue>PNbZ3TCGSM6qTUY22HxaPmfe/exCDpHn5ZpswrNMjmI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SyncService.exe" size="50688">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SyncService.exe" size="53248">
       <assemblyIdentity name="SyncService" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>EC4z7WQB8Y/c1Lj7293Pk0eedhulN6A2ZettQqiLRe8=</dsig:DigestValue>
+        <dsig:DigestValue>OXAB++2xnNC3WNllGWU/BQa5lLROCS9nLL/b5nm4RwY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

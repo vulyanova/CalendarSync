@@ -1,7 +1,8 @@
 ﻿import { connect } from 'react-redux';
 import Authorize from '../components/Authorize';
 import {
-    authorize
+    authorize,
+    getHistory
 } from '../actions';
 
 const mapStateToProps = (state) => ({
@@ -10,7 +11,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => {
     return {
-        authorize: (authorizationParams) => dispatch(authorize(authorizationParams))
+        authorize: (authorizationParams) => dispatch(authorize(authorizationParams)),
+        getHistory: (user) => dispatch(getHistory(user))
     }
 }
 
