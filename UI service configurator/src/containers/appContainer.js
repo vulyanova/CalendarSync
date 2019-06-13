@@ -5,7 +5,7 @@ const mapStateToProps = (state) => ({
     isLoading: state.applicationParams.isLoading,
     isAuthorizing: state.applicationParams.isAuthorizing,
     isConfiguring: state.applicationParams.isConfiguring,
-    isTeamUpConfiguring: state.applicationParams.isTeamUpConfiguring,
+    isHistoryShown: state.applicationParams.isHistoryShown,
 })
 
 

@@ -7,10 +7,20 @@ namespace Synchronizer
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
 
-        public AppointmentDate(string start, string end)
+        /*public AppointmentDate(string start, string end)
         {
             Start = DateTime.ParseExact(start, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
             End = DateTime.ParseExact(end, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+        }*/
+
+        public AppointmentDate()
+        {}
+
+
+        public AppointmentDate(string start, string end)
+        {
+            Start = DateTime.Parse(start, System.Globalization.CultureInfo.InvariantCulture);
+            End = DateTime.Parse(end, System.Globalization.CultureInfo.InvariantCulture);
         }
 
         public AppointmentDate(DateTime start, DateTime end)

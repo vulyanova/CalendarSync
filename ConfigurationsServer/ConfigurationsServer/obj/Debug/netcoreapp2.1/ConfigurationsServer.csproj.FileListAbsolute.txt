@@ -17,8 +17,8 @@ C:\Projects\ConfigurationsServer\ConfigurationsServer\bin\Debug\netcoreapp2.1\Ca
 C:\Projects\ConfigurationsServer\ConfigurationsServer\bin\Debug\netcoreapp2.1\Databases.dll
 C:\Projects\ConfigurationsServer\ConfigurationsServer\bin\Debug\netcoreapp2.1\Databases.pdb
 C:\Projects\ConfigurationsServer\ConfigurationsServer\bin\Debug\netcoreapp2.1\Databases.dll.config
-C:\Projects\ConfigurationsServer\ConfigurationsServer\obj\Debug\netcoreapp2.1\ConfigurationsServer.csprojAssemblyReference.cache
 C:\Projects\ConfigurationsServer\ConfigurationsServer\bin\Debug\netcoreapp2.1\Calendars.dll.config
 C:\Projects\ConfigurationsServer\ConfigurationsServer\bin\Debug\netcoreapp2.1\Synchronizer.dll
 C:\Projects\ConfigurationsServer\ConfigurationsServer\bin\Debug\netcoreapp2.1\Synchronizer.pdb
 C:\Projects\ConfigurationsServer\ConfigurationsServer\bin\Debug\netcoreapp2.1\Synchronizer.dll.config
+C:\Projects\ConfigurationsServer\ConfigurationsServer\obj\Debug\netcoreapp2.1\ConfigurationsServer.csprojAssemblyReference.cache

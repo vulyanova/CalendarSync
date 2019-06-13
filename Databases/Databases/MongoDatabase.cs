@@ -12,6 +12,7 @@ namespace Databases
         private const string AuthorizationCollection = "Authorization";
         private const string ConnectionCollection = "Connection";
         private const string ConfigurationsCollection = "Configurations";
+        private const string HistoryCollection = "History";
         private IMongoDatabase _database;
 
         public MongoDatabase()

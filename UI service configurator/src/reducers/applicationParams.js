@@ -2,6 +2,7 @@
     isAuthorizing: true,
     isLoading: false,
     isConfiguring: true,
+    isHistoryShown: false,
     usersFetched: false,
     users: []
 };
@@ -23,7 +24,12 @@ export const applicationParams = (state = initialState, action) => {
                 ...state,
                 isLoading: true
             }
-        case 'ADD_CONFIGS':
+        case 'SHOW_HISTORY':
+            return {
+                ...state,
+                isHistoryShown: true
+            }
+    case 'ADD_CONFIGS':
             return {
                 ...state,
                 isLoading: true

@@ -1,11 +1,8 @@
 ﻿using Calendars;
-using MongoDB.Driver;
 using Synchronizer;
 using SyncService.CalendarAdapters;
 using SyncService.DbAdapters.MongoDbAdapter;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -13,27 +10,21 @@ namespace SyncService
 {
     public static class SyncController
     {
-        static readonly string url = "https://localhost:5001/api/authorize/";
-        private static IMongoCollection<Log> _logCollection;
+        static readonly string url = "https://localhost:5001/api/";
 
-        static async Task<AuthorizeConfigurations> GetAuthorizationConfigurationsAsync(string path)
+        static async Task PushLogs(string user, int type, Appointment appointment)
+        {
+            var client = new HttpClient();
+            await client.PostAsJsonAsync(url + "history/" + user + "/" + type, appointment);
+        }
+
+        static async Task<AuthorizeConfigurations> GetAuthorizationConfigurationsAsync(string user)
         {
             AuthorizeConfigurations configs = null;
             var client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(path);
+            HttpResponseMessage response = await client.GetAsync(url + "authorize/" + user);
             if (response.IsSuccessStatusCode)
-            {
-                try
-                {
-                    configs = await response.Content.ReadAsAsync<AuthorizeConfigurations>();
-                }
-                catch (Exception ex)
-                {
-                    EventLog.WriteEntry("SyncService", "Invalid authorization request response format: "+ ex.Message);
-                }
-            }
-            else
-                EventLog.WriteEntry("SyncService", "Authorization request failed:" + response.StatusCode);
+                configs = await response.Content.ReadAsAsync<AuthorizeConfigurations>();
 
             return configs;
         }
@@ -56,16 +47,13 @@ namespace SyncService
                 if (item.AppointmentStatus == Appointment.Status.Changed)
                     await calendar.UpdateAppointmentAsync(item);
 
-                var log = new Log(user, item.AppointmentStatus, appointmentCalendar.Type, item);
-
-                await _logCollection.InsertOneAsync(log);
+                await PushLogs(user, (int)appointmentCalendar.Type, item);
             }
         }
 
-        public static async Task Sync(string user, IMongoCollection<Log> logCollection)
+        public static async Task Sync(string user)
         {
-            _logCollection = logCollection;
-            var authorizationParams = await GetAuthorizationConfigurationsAsync(url+user);
+            var authorizationParams = await GetAuthorizationConfigurationsAsync(user);
 
             var configuratons = Configurations.GetInstance();
 

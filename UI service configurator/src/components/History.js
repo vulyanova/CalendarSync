@@ -1,52 +1,55 @@
 ﻿import React from 'react';
 
 
-const Calendar = ({ items , currentState}) => (
-     <div>
+const Events = ({ events}) => (
+     <tbody>
         {
-            items.map((item, i) =>
+            events.map((event, i) =>
             {
-                return <List key={i} name = {item.name} items={currentState==="present"?item.present:item.previous} />
+                return <Event key={i} value = {event._id} event={event} />
             })
         } 
-    </div>
+    </tbody>
 );
 
 
-const List = ({ items , name}) => (
-    <div className="calendar">
-        <div className = "name">{ name }</div>            
-            <div>
-                {
-                    items.map((item, i) =>
-                    {
-                        return <Appointment key={i} item={item}/>
-                    })
-                }
-            </div>
-    </div>
+const Event = ({ event , value}) => (
+    <tr >
+        <td >{event.user} </td>  
+        <td >{event.time} </td> 
+        <td >{event.calendar} </td> 
+        <td >{event.action} </td> 
+        <State item = {event.previousState}/> 
+        <State item = {event.presentState}/> 
+    </tr>
 );
 
-const Appointment = ({ item }) => (
-        <div className="appointment">
-            <div className = "subject">{item.subject}</div>
-            <div className = "description">{item.description}</div>
-            <div className = "date">{item.date}</div>
-            <div className = "attendees">{item.attendees}</div>
-        </div>
+const State = ({ item }) => (
+    <td className="state" >
+         <span> {item.subject} </span>
+         <span>{item.description}</span>
+         <span>{item.location}</span>
+         <span>{item.attendees}</span>
+         <span>{item.date}</span>
+    </td>
 );
 
 
 const History = (props) => {
     return (
-        <div>
-            <Calendar items={props.calendars} currentState = {props.currentState} />
-            <button onClick={() => {
-                    props.changeHistoryState();
-                }}>
-                    {props.currentState==="present"?"Previous":"Present"}
-            </button>
-        </div>
+        <table className = "logs">
+            <thead>
+                <tr>
+                <th>User</th>
+                <th>Updated</th>
+                <th>Calendar</th>
+                <th>Action</th>
+                <th>Previous state</th>
+                <th>Current state</th>
+                </tr>
+            </thead>
+            <Events events={props.calendars} />    
+        </table>
     )
 }
 

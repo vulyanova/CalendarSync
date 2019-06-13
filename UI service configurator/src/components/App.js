@@ -11,7 +11,9 @@ class App extends Component{
         if (this.props.isLoading)
             return <Loading />
         if (this.props.isAuthorizing)
-            return <Authorize /> 
+            return <Authorize />
+        if (this.props.isHistoryShown)
+            return <History />
         if (this.props.isConfiguring)
             return <Configure /> 
         return <StartService /> 

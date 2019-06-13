@@ -11,15 +11,6 @@ namespace SyncService
         public SyncService()
         {
             InitializeComponent();
-            eventLog1 = new EventLog();
-
-            AutoLog = false;
-
-            if (!EventLog.SourceExists("SyncService"))
-                EventLog.CreateEventSource("SyncService", "MyLog");
-
-            eventLog1.Source = "SyncService";
-            eventLog1.Log = "MyLog";
         }
 
         protected override void OnStart(string[] args)
@@ -38,14 +29,10 @@ namespace SyncService
 
             Configurations.GetConfigurations(user).Wait();
 
-            var client = new MongoClient("mongodb+srv://newadmin:02072012@calendarcluster-tjsbr.gcp.mongodb.net/test?retryWrites=true");
-            var database = client.GetDatabase("SyncConfigurations");
-            var collection = database.GetCollection<Log>("History");
-
             var configuratons = Configurations.GetInstance();
 
             var timer = new Timer();
-            timer.Elapsed += (sender, e) => OnTimer(timer, user, collection);
+            timer.Elapsed += (sender, e) => OnTimer(timer, user);
             timer.Interval = configuratons.Timer;
             timer.Enabled = true;
 
@@ -57,16 +44,11 @@ namespace SyncService
         {
         }
 
-        public void OnTimer(Timer timer, string user, IMongoCollection<Log> logCollection)
+        public void OnTimer(Timer timer, string user)
         {
             timer.Stop();
-            SyncController.Sync(user, logCollection).Wait();
+            SyncController.Sync(user).Wait();
             timer.Start();
-        }
-
-        private void eventLog1_EntryWritten(object sender, EntryWrittenEventArgs e)
-        {
-
         }
     }
 }

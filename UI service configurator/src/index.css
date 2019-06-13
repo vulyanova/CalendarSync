@@ -182,6 +182,7 @@ button {
 
 table {
     border-collapse: collapse;
+    width: 100%;
   }
   
   th, td {
@@ -190,46 +191,16 @@ table {
     border-bottom: 1px solid #ddd;
   }
 
-    .calendar{
-        display: inline-table;
-        margin: 10px;
-    }
-        .calendar .name{
-            font-size: 18pt;
-            font-weight: bold;
-            text-align: center;
-        }
+.logs tbody :hover{
+      background-color: aliceblue;
+  }
 
-        .calendar .appointment {
-            background-color: rgb(225, 248, 248);
-            height: 150px;
-            width: 250px;
-            margin: 10px;
-            font-size: 10pt;
-            border-radius: 5%;
-            padding: 10px;
-        }
 
-            .calendar .appointment .subject {
-                margin: 10px;
-                font-size: 14pt;
-                font-weight: bold;
-            }
 
-            .calendar .appointment .description {
-                margin: 10px;
-            }
+  span{
+      display: block;
+  }
 
-            .calendar .appointment .date {
-                margin: 10px;
-                font-style: italic;
-            }
-
-            .calendar .appointment .attendees {
-                margin: 10px;
-            }
-
-            .calendar .appointment:hover {
-                background-color: rgb(235, 248, 248);
-            }
-
+.state {
+    width: 500px;
+}

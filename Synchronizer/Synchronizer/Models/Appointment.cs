@@ -17,7 +17,7 @@ namespace Synchronizer
         public DateTime Updated { get; set; }
         public Status AppointmentStatus { get; set; } = Status.Unchecked;
         public string CreatorId { get; set; }
-        public Appointment PreviousState { get; private set; }
+        public Appointment PreviousState { get; set; }
 
         public bool Equals(Appointment appointment, bool isPrivate)
         {
@@ -26,7 +26,7 @@ namespace Synchronizer
             if (isPrivate)
                 areEqualPrivateFields = true;
             else
-                areEqualPrivateFields = (Subject == appointment.Subject && Description == appointment.Description);
+                areEqualPrivateFields = (Subject.Trim() == appointment.Subject.Trim() && Description.Trim() == appointment.Description.Trim());
 
             bool isEqualAppointment = areEqualPrivateFields &&
                 Location == appointment.Location &&

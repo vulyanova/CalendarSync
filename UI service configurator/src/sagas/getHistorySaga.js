@@ -6,7 +6,7 @@ export function* getHistorySaga() {
 }
 
 function getHistory(user) {
-    return axios.get('https://localhost:5001/api/history/'+ user);
+    return axios.get('https://localhost:5001/api/history/');
 }
 
 function* workerSaga(action) {
@@ -16,5 +16,6 @@ function* workerSaga(action) {
     yield put({ type: "CHANGE_HISTORY_CALENDARS", calendars })
     
     yield put({ type: "STOP_AUTHORIZING" })
+    yield put({ type: "SHOW_HISTORY" })
     yield put({ type: "SUCCESS_LOADING" })
 }

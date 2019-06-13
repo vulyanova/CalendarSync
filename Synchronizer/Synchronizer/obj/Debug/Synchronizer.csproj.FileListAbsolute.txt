@@ -134,4 +134,3 @@ C:\Projects\Synchronizer\Synchronizer\bin\Debug\Google.Apis.Auth.PlatformService
 C:\Projects\Synchronizer\Synchronizer\bin\Debug\Google.Apis.Auth.PlatformServices.xml
 C:\Projects\Synchronizer\Synchronizer\bin\Debug\Google.Apis.PlatformServices.pdb
 C:\Projects\Synchronizer\Synchronizer\bin\Debug\Google.Apis.PlatformServices.xml
-C:\Projects\Synchronizer\Synchronizer\obj\Debug\Synchronizer.csprojAssemblyReference.cache
