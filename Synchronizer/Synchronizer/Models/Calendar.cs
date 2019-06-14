@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Synchronizer
+namespace Synchronizer.Models
 {
     public enum CalendarType { Google, Outlook, TeamUp };
 

@@ -1,15 +1,15 @@
 ﻿using Databases;
 using MongoDB.Driver;
-using Synchronizer;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using Synchronizer.Models;
 
 namespace SyncService.DbAdapters.MongoDbAdapter
 {
     public class MongoDbAdapter : IDbInteraction
     {
-        private IMongoCollection<MongoItem> _collection;
+        private readonly IMongoCollection<MongoItem> _collection;
 
         public MongoDbAdapter(string collection)
         {
@@ -57,11 +57,11 @@ namespace SyncService.DbAdapters.MongoDbAdapter
             var items = await GetCalendarItems();
 
             foreach (var item in items)
-                if (syncAppointments.Where(connection => connection.GoogleId == item.GoogleId).Count() == 0)
+                if (syncAppointments.All(connection => connection.GoogleId != item.GoogleId))
                     await Remove(item);
 
             foreach (var syncAppointment in syncAppointments)
-                if (items.Where(connection => connection.GoogleId == syncAppointment.GoogleId).Count() == 0)
+                if (items.All(connection => connection.GoogleId != syncAppointment.GoogleId))
                     await Add(syncAppointment);
 
         }

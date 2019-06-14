@@ -1,5 +1,6 @@
 ﻿using Synchronizer;
 using System.Collections.Generic;
+using Synchronizer.Models;
 using Xunit;
 
 namespace SyncCalendars.Test

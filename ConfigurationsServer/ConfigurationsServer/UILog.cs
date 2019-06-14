@@ -1,32 +1,32 @@
-﻿using System;
+﻿using Synchronizer.Models;
 
 namespace ConfigurationsServer
 {
-    public class UILog
+    public class UiLog
     {
         public string User;
         public string Calendar;
         public string Time;
         public string Action;
-        public UIState PreviousState;
-        public UIState PresentState;
+        public UiState PreviousState;
+        public UiState PresentState;
 
-        public UILog(Log log)
+        public UiLog(Log log)
         {
             User = log.User;
             Time = log.Time.ToLocalTime().ToString("dd/MM/yyyy HH:mm");
-            PreviousState = new UIState(log.PreviousState);
-            PresentState = new UIState(log.PresentState);
+            PreviousState = new UiState(log.PreviousState);
+            PresentState = new UiState(log.PresentState);
 
             switch (log.Calendar)
             {
-                case Synchronizer.CalendarType.Google:
+                case CalendarType.Google:
                     Calendar = "Google";
                     break;
-                case Synchronizer.CalendarType.Outlook:
+                case CalendarType.Outlook:
                     Calendar = "Outlook";
                     break;
-                case Synchronizer.CalendarType.TeamUp:
+                case CalendarType.TeamUp:
                     Calendar = "TeamUp";
                     break;
             }
@@ -42,27 +42,6 @@ namespace ConfigurationsServer
                 case Log.AppointmentAction.Updated:
                     Action = "Updated";
                     break;
-            }
-        }
-    }
-
-    public class UIState
-    {
-        public string Subject = "";
-        public string Description = "";
-        public string Location = "";
-        public string Attendees = "";
-        public string Date = "";
-
-        public UIState(State state)
-        {
-            if (state!=null)
-            {
-                Subject = state.Subject?.ToString();
-                Description = state.Description?.ToString();
-                Location = state.Location?.ToString();
-                Attendees = Attendees != null?string.Join(", ", state.Attendees.ToArray()):"";
-                Date = state.Date.Start.ToString("dd/MM/yyyy hh:mm") + " - " + state.Date.End.ToString("dd/MM/yyyy hh:mm");
             }
         }
     }

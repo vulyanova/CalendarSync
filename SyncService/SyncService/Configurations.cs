@@ -5,19 +5,19 @@ namespace SyncService
 {
     public class Configurations
     {
-        private static Configurations _instance = null;
-        public string CalendarId { get; private set; }
-        public int TeamUpCalendarId { get; private set; }
-        public int Timer { get; private set; }
-        public bool ShowSummary { get; private set; } = true;
+        private static Configurations _instance;
+        public string CalendarId { get; }
+        public int TeamUpCalendarId { get; }
+        public int Timer { get;  }
+        public bool ShowSummary { get;  }
 
-        private static readonly string url = "https://localhost:5001/api/configurations/";
+        private const string Url = "https://localhost:5001/api/configurations/";
 
         private static async Task<Configs> GetAuthorizationConfigurationsAsync(string path)
         {
             Configs configs = null;
             var client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(path);
+            var response = await client.GetAsync(path);
             if (response.IsSuccessStatusCode)
             {
                 configs = await response.Content.ReadAsAsync<Configs>();
@@ -35,7 +35,7 @@ namespace SyncService
 
         public static async Task GetConfigurations(string user)
         {
-            var configs = await GetAuthorizationConfigurationsAsync(url + user);
+            var configs = await GetAuthorizationConfigurationsAsync(Url + user);
             _instance = new Configurations(configs);        
         }
 

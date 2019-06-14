@@ -3,14 +3,15 @@ using SyncService;
 using SyncService.DbAdapters.MongoDbAdapter;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Synchronizer.Models;
 using Xunit;
 
 namespace SyncCalendars.Test
 {
     public class MongoDbTests
     {
-        private static readonly string _testUser = "calendarTests";
-        private static readonly MongoDbAdapter _db = new MongoDbAdapter(_testUser);
+        private const string TestUser = "calendarTests";
+        private static readonly MongoDbAdapter _db = new MongoDbAdapter(TestUser);
 
         private static async Task CleanTestUserDb()
         {

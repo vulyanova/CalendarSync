@@ -1,5 +1,4 @@
-﻿using MongoDB.Driver;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Diagnostics;
 using System.ServiceProcess;
 using System.Timers;
@@ -29,11 +28,11 @@ namespace SyncService
 
             Configurations.GetConfigurations(user).Wait();
 
-            var configuratons = Configurations.GetInstance();
+            var configuration = Configurations.GetInstance();
 
             var timer = new Timer();
             timer.Elapsed += (sender, e) => OnTimer(timer, user);
-            timer.Interval = configuratons.Timer;
+            timer.Interval = configuration.Timer;
             timer.Enabled = true;
 
             

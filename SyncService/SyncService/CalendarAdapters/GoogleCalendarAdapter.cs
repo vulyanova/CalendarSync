@@ -1,28 +1,31 @@
 ﻿using Calendars;
 using Google.Apis.Calendar.v3.Data;
-using Synchronizer;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Synchronizer.Models;
 
 namespace SyncService.CalendarAdapters
 {
     public class GoogleCalendarAdapter: ICalendar
     {
         private static GoogleCalendarAdapter _instance;
-        private GoogleCalendar _calendar;
-        private string _calendarId = "primary";
+        private readonly GoogleCalendar _calendar;
+        private readonly string _calendarId;
+        private readonly bool _showSummary;
 
-        private GoogleCalendarAdapter(AuthorizeConfigurations authorizeConfigurations, string calendarId)
+        private GoogleCalendarAdapter(AuthorizeConfigurations authorizeConfigurations, string calendarId, bool isPrivate)
         {
             _calendar = new GoogleCalendar(authorizeConfigurations);
             _calendarId = calendarId;
             _calendar.GetService();
+            _showSummary = !isPrivate;
         }
 
-        public static void Authorize(AuthorizeConfigurations authorizeConfigurations, string calendarId)
+        public static void Authorize(AuthorizeConfigurations authorizeConfigurations, string calendarId, bool isPrivate)
         {
-            _instance = new GoogleCalendarAdapter(authorizeConfigurations, calendarId);
+            _instance = new GoogleCalendarAdapter(authorizeConfigurations, calendarId, isPrivate);
         }
 
         public static GoogleCalendarAdapter GetInstance()
@@ -42,10 +45,9 @@ namespace SyncService.CalendarAdapters
                 attendees.Add(new EventAttendee { Email = attendee });
 
             var googleEvent = await _calendar.GetAppointment(_calendarId, appointment.Id);
-            var showSummary = true;
 
-            googleEvent.Summary = showSummary ? appointment.Subject : googleEvent.Summary;
-            googleEvent.Description = showSummary ? appointment.Description : googleEvent.Description;
+            googleEvent.Summary = _showSummary ? appointment.Subject : googleEvent.Summary;
+            googleEvent.Description = _showSummary ? appointment.Description : googleEvent.Description;
             googleEvent.Location = appointment.Location;
             googleEvent.Start.DateTime = appointment.Date.Start;
             googleEvent.End.DateTime = appointment.Date.End;
@@ -65,11 +67,11 @@ namespace SyncService.CalendarAdapters
                 var attendees = new List<string>();
 
                 if (item.Attendees != null)
-                    foreach (var participant in item.Attendees)
-                        attendees.Add(participant.Email.Trim());
+                    attendees.AddRange(item.Attendees.Select(participant => participant.Email.Trim()));
 
                 attendees.Sort();
 
+                if (item.Updated == null) continue;
                 var newEvent = new Appointment()
                 {
                     Id = item.Id,
@@ -89,10 +91,13 @@ namespace SyncService.CalendarAdapters
 
         private static AppointmentDate GetDateTime(Event item)
         {
-            AppointmentDate date;
+            var date = new AppointmentDate();
 
             if (item.Start.DateTime != null)
-                date = new AppointmentDate((DateTime)item.Start.DateTime, (DateTime)item.End.DateTime);
+            {
+                if (item.End.DateTime != null)
+                    date = new AppointmentDate((DateTime) item.Start.DateTime, (DateTime) item.End.DateTime);
+            }
             else
                 date = new AppointmentDate(item.Start.Date, item.End.Date);
 

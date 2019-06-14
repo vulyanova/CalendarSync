@@ -1,5 +1,5 @@
 ﻿using MongoDB.Bson;
-using Synchronizer;
+using Synchronizer.Models;
 
 namespace SyncService.DbAdapters.MongoDbAdapter
 {

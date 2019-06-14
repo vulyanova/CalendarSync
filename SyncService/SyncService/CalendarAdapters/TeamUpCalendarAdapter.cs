@@ -2,13 +2,13 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Calendars.TeamUpCalendar;
-using Synchronizer;
+using Synchronizer.Models;
 
 namespace SyncService.CalendarAdapters
 {
     public class TeamUpCalendarAdapter : ICalendar
     {
-        private TeamUpCalendar _calendar;
+        private readonly TeamUpCalendar _calendar;
 
         public TeamUpCalendarAdapter(string calendarKey, int calendarId)
         {
@@ -68,7 +68,7 @@ namespace SyncService.CalendarAdapters
                 var appointment = new Appointment
                 {
                     Id = teamUpAppointment.Id,
-                    Location = teamUpAppointment.Location == string.Empty ? null : teamUpAppointment.Location,
+                    Location = teamUpAppointment.Location,
                     Date = new AppointmentDate(teamUpAppointment.Start, teamUpAppointment.End),
                     Updated = teamUpAppointment.Update,
                     Version = teamUpAppointment.Version,

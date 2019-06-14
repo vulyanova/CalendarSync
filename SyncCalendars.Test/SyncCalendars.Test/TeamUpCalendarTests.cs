@@ -32,10 +32,10 @@ namespace SyncCalendars.Test
 
             var result = await teamUpCalendar.GetNearestAppointments();
 
-            Assert.True(result.Where(item => 
-            item.Id == appointment.Id && 
-            item.Location == "Moscow" &&
-            item.Who == attendees).Count()>0);    
+            Assert.True(result != null && 
+                        result.Any(item => item.Id == appointment.Id && 
+                                           item.Location == "Moscow" &&
+                                           item.Who == attendees));    
         }
     }
 }

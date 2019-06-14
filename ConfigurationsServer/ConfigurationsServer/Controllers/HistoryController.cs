@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
-using Synchronizer;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Synchronizer.Models;
 
 namespace ConfigurationsServer.Controllers
 {
@@ -25,41 +25,37 @@ namespace ConfigurationsServer.Controllers
 
         [EnableCors("Policy")]
         [HttpGet("{user}")]
-        public async Task<List<UILog>> GetUserLogs(string user)
+        public async Task<List<UiLog>> GetUserLogs(string user)
         {
             var collection = GetLogCollection();
 
             var userCollectionCursor = await collection.FindAsync(item => item.User == user);
             var userCollection = await userCollectionCursor.ToListAsync();
 
-            return GetUILogs(userCollection);
+            return GetUiLogs(userCollection);
         }
 
         [EnableCors("Policy")]
         [HttpGet]
-        public async Task<List<UILog>> GetLogs()
+        public async Task<List<UiLog>> GetLogs()
         {
             var collection = GetLogCollection();
             var userCollection = await collection.AsQueryable().ToListAsync();
 
-            return GetUILogs(userCollection);
+            return GetUiLogs(userCollection);
         }
 
-        private IMongoCollection<Log> GetLogCollection()
+        private static IMongoCollection<Log> GetLogCollection()
         {
             var database = new MongoDatabase();
             return database.GetDatabase().GetCollection<Log>(Collection);
         }
 
-        private List<UILog> GetUILogs(List<Log> logs)
+        private static List<UiLog> GetUiLogs(IEnumerable<Log> logs)
         {
             var sorted = logs.OrderByDescending(item => item.Time);
-            var uiCollection = new List<UILog>();
 
-            foreach (var item in sorted)
-                uiCollection.Add(new UILog(item));
-
-            return uiCollection;
+            return sorted.Select(item => new UiLog(item)).ToList();
         }
     }
 }

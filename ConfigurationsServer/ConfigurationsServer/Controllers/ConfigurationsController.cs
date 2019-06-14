@@ -34,7 +34,7 @@ namespace ConfigurationsServer.Controllers
         [HttpGet("timers")]
         public Timers[] GetTimers(string user)
         {
-            var timers = new Timers[]
+            var timers = new[]
             {
                 new Timers { Name = "1 minute", Ms = 60000 },
                 new Timers { Name = "10 minutes", Ms = 600000 },

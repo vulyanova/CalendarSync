@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Synchronizer.Models;
 
 namespace Synchronizer
 {
     public class Synchronizer
     {
         public List<Calendar> Calendars { get; set; }
-        private List<MainSyncItem> _existedAppointments;
+        private readonly List<MainSyncItem> _existedAppointments;
         private readonly bool _isPrivate;
 
         public Synchronizer(List<Calendar> calendars, List<MainSyncItem> database, bool isPrivate)
@@ -54,13 +55,13 @@ namespace Synchronizer
             foreach (var calendar in Calendars)
             {
                 if (calendar.Type == CalendarType.Google)
-                    equalAppointments.Add(calendar.Appointments.Where(gItem => gItem.Id == calendarItem.GoogleId).FirstOrDefault());
+                    equalAppointments.Add(calendar.Appointments.FirstOrDefault(gItem => gItem.Id == calendarItem.GoogleId));
 
                 if (calendar.Type == CalendarType.Outlook)
-                    equalAppointments.Add(calendar.Appointments.Where(gItem => gItem.Id == calendarItem.OutlookId).FirstOrDefault());
+                    equalAppointments.Add(calendar.Appointments.FirstOrDefault(gItem => gItem.Id == calendarItem.OutlookId));
 
                 if (calendar.Type == CalendarType.TeamUp)
-                    equalAppointments.Add(calendar.Appointments.Where(gItem => gItem.Id == calendarItem.TeamUpId).FirstOrDefault());
+                    equalAppointments.Add(calendar.Appointments.FirstOrDefault(gItem => gItem.Id == calendarItem.TeamUpId));
             }
 
             return equalAppointments;

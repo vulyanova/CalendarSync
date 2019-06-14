@@ -1,5 +1,5 @@
-﻿using Synchronizer;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Synchronizer.Models;
 
 namespace SyncService
 {

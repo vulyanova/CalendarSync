@@ -3,16 +3,17 @@ using Synchronizer;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Synchronizer.Models;
 
 namespace SyncService.CalendarAdapters
 {
     public class OutlookCalendarAdapter: ICalendar
     {
         private static OutlookCalendarAdapter _instance;
-        private Application _oApp;
-        private NameSpace _mapiNS;
+        private readonly Application _oApp;
+        private readonly NameSpace _mapiNS;
         private MAPIFolder _calendarFolder;
-        private List<AppointmentItem> _items;
+        private readonly List<AppointmentItem> _items;
         private bool _showSummary ;
         
         private OutlookCalendarAdapter()
@@ -21,9 +22,9 @@ namespace SyncService.CalendarAdapters
             _mapiNS = _oApp.GetNamespace("MAPI");
             _items = new List<AppointmentItem>();
             _showSummary = true;
-            var CurrentFolder = _mapiNS.GetDefaultFolder(OlDefaultFolders.olFolderCalendar);
+            var currentFolder = _mapiNS.GetDefaultFolder(OlDefaultFolders.olFolderCalendar);
 
-            _calendarFolder = CurrentFolder;
+            _calendarFolder = currentFolder;
         }
 
         public void ShowSummary()
@@ -33,9 +34,9 @@ namespace SyncService.CalendarAdapters
 
         public void ChangeCalendar(string calendar)
         {
-            var CurrentFolder = _mapiNS.GetDefaultFolder(OlDefaultFolders.olFolderCalendar);
+            var currentFolder = _mapiNS.GetDefaultFolder(OlDefaultFolders.olFolderCalendar);
 
-            _calendarFolder = CurrentFolder.Folders[calendar];
+            _calendarFolder = currentFolder.Folders[calendar];
         }
 
         public void HideSummary()
@@ -79,29 +80,28 @@ namespace SyncService.CalendarAdapters
 
             foreach (AppointmentItem item in items)
             {
-                if (item.End >= startDate && item.Start <= endDate)
+                if (item.End < startDate || item.Start > endDate) continue;
+
+                _items.Add(item);
+                var attendees = new List<string>();
+                if (item.RequiredAttendees != null)
+                    foreach (var attendee in item.RequiredAttendees.Split(';'))
+                        if (attendee.Contains("@"))
+                            attendees.Add(attendee.Trim());
+
+                attendees.Sort();
+
+                var newEvent = new Appointment()
                 {
-                    _items.Add(item);
-                    var attendees = new List<string>();
-                    if (item.RequiredAttendees != null)
-                        foreach (var attendee in item.RequiredAttendees.Split(';'))
-                            if (attendee.Contains("@"))
-                                attendees.Add(attendee.Trim());
-
-                    attendees.Sort();
-
-                    var newEvent = new Appointment()
-                    {
-                        Id = item.GlobalAppointmentID,
-                        Subject = item.Subject,
-                        Description = item.Body,
-                        Location = item.Location,
-                        Date = new AppointmentDate(item.Start, item.End),
-                        Updated = item.LastModificationTime,
-                        Attendees = attendees
-                    };
-                    list.Add(newEvent);
-                }
+                    Id = item.GlobalAppointmentID,
+                    Subject = item.Subject,
+                    Description = item.Body,
+                    Location = item.Location,
+                    Date = new AppointmentDate(item.Start, item.End),
+                    Updated = item.LastModificationTime,
+                    Attendees = attendees
+                };
+                list.Add(newEvent);
             }
 
             return await Task.FromResult(list);
@@ -134,7 +134,7 @@ namespace SyncService.CalendarAdapters
 
         public async Task<string> AddAppointmentAsync(Appointment appointment)
         {
-            string profile = "";
+            var profile = "";
             _mapiNS.Logon(profile, null, null, null);
 
             var item = (AppointmentItem)_oApp.CreateItem(OlItemType.olAppointmentItem).Move(_calendarFolder); 

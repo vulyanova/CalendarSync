@@ -1,42 +1,41 @@
 ﻿using Calendars;
-using Synchronizer;
 using SyncService.CalendarAdapters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Synchronizer.Models;
 using Xunit;
 
 namespace SyncCalendars.Test
 {
     public class CalendarsTests
     {
-        private static readonly string _clientId = "1064095847198-jolq6914cn32le94k4ksh8m5a1786a27.apps.googleusercontent.com";
-        private static readonly string _clientSecret = "AJa_xXPWVdX0V9bZiKJrg3-K";
-        private static readonly string _user = "chuvaginavika@gmail.com";
-        private static readonly string _accessToken = "ya29.GlsLB7S9TXLIc3MV3JbSKhuMsOk0YEK6q1ZHwHhCpQrl4fzK5XOf6eM_I_ciDUDNFMwUr_imnnz0Z46DUCEAuEqEvamBAJVZztzQjD_ZYBZihp_6MMkXIT1KGB58";
-        private static readonly string _refreshToken = "1/D6GIPCOLJBCAWjTE5U92v14GqK9hlKKA_1x7LA7HFFk";
-        private static readonly string _calendarId = "l9b4t4broehnafqhemo2b264ho@group.calendar.google.com";
-        private static readonly string _subject = "calendarTest";
-        private static readonly string _outlookCalendarName = "calendar for tests";
+        private const string ClientId = "1064095847198-jolq6914cn32le94k4ksh8m5a1786a27.apps.googleusercontent.com";
+        private const string ClientSecret = "AJa_xXPWVdX0V9bZiKJrg3-K";
+        private const string User = "chuvaginavika@gmail.com";
+        private const string AccessToken = "ya29.GlsLB7S9TXLIc3MV3JbSKhuMsOk0YEK6q1ZHwHhCpQrl4fzK5XOf6eM_I_ciDUDNFMwUr_imnnz0Z46DUCEAuEqEvamBAJVZztzQjD_ZYBZihp_6MMkXIT1KGB58";
+        private const string RefreshToken = "1/D6GIPCOLJBCAWjTE5U92v14GqK9hlKKA_1x7LA7HFFk";
+        private const string CalendarId = "l9b4t4broehnafqhemo2b264ho@group.calendar.google.com";
+        private const string Subject = "calendarTest";
+        private const string OutlookCalendarName = "calendar for tests";
 
-        private static readonly AuthorizeConfigurations authorizeConfigs = new AuthorizeConfigurations
+        private static readonly AuthorizeConfigurations AuthorizeConfigs = new AuthorizeConfigurations
         {
-            ClientId = _clientId,
-            ClientSecret = _clientSecret,
-            AccessToken = _accessToken,
-            RefreshToken = _refreshToken,
-            User = _user
+            ClientId = ClientId,
+            ClientSecret = ClientSecret,
+            AccessToken = AccessToken,
+            RefreshToken = RefreshToken,
+            User = User
         };
-
 
         public static ICalendar GetCalendar(int index)
         {
-            GoogleCalendarAdapter.Authorize(authorizeConfigs, _calendarId);
+            GoogleCalendarAdapter.Authorize(AuthorizeConfigs, CalendarId, true);
             var googleCalendar = GoogleCalendarAdapter.GetInstance();
             var outlookCalendar =OutlookCalendarAdapter.GetInstance();
             var teamUpCalendar = new TeamUpCalendarAdapter("ksjea1t78n1525ka23", 6551483);
-            outlookCalendar.ChangeCalendar(_outlookCalendarName);
+            outlookCalendar.ChangeCalendar(OutlookCalendarName);
 
             var list =  new List<ICalendar>
             {
@@ -81,7 +80,7 @@ namespace SyncCalendars.Test
             
             var appointment = new Appointment()
             {
-                Subject = _subject,
+                Subject = Subject,
                 Description = "test",
                 Date = new AppointmentDate(startDate, endDate),
                 Attendees = new List<string> {secondAttendee, firstAttendee },
@@ -112,7 +111,7 @@ namespace SyncCalendars.Test
 
             var appointment = new Appointment()
             {
-                Subject = _subject,
+                Subject = Subject,
                 Description = "test",
                 Date = new AppointmentDate(startDate, endDate),
                 Attendees = new List<string>(),

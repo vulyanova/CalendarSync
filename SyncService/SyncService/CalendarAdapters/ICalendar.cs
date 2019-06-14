@@ -1,4 +1,4 @@
-﻿using Synchronizer;
+﻿using Synchronizer.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,6 +10,5 @@ namespace SyncService.CalendarAdapters
         Task UpdateAppointmentAsync(Appointment appointment);
         Task<List<Appointment>> GetNearestAppointmentsAsync();
         Task<string> AddAppointmentAsync(Appointment appointment);
-
     }
 }

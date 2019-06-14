@@ -1,4 +1,4 @@
-﻿namespace Synchronizer
+﻿namespace Synchronizer.Models
 {
     public class MainSyncItem
     {

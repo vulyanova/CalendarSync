@@ -1,14 +1,13 @@
-﻿using Synchronizer;
-using SyncService;
+﻿using SyncService;
 using System.Collections.Generic;
 using System.Linq;
+using Synchronizer.Models;
 using Xunit;
 
 namespace SyncCalendars.Test
 {
     public class DbSynchronizerTests
     {
-        // todo
         [Fact]
         public void NewAppointments_UpdateDb()
         {

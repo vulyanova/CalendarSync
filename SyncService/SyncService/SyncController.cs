@@ -5,24 +5,25 @@ using SyncService.DbAdapters.MongoDbAdapter;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Synchronizer.Models;
 
 namespace SyncService
 {
     public static class SyncController
     {
-        static readonly string url = "https://localhost:5001/api/";
+        private const string Url = "https://localhost:5001/api/";
 
-        static async Task PushLogs(string user, int type, Appointment appointment)
+        private static async Task PushLogs(string user, int type, Appointment appointment)
         {
             var client = new HttpClient();
-            await client.PostAsJsonAsync(url + "history/" + user + "/" + type, appointment);
+            await client.PostAsJsonAsync(Url + "history/" + user + "/" + type, appointment);
         }
 
-        static async Task<AuthorizeConfigurations> GetAuthorizationConfigurationsAsync(string user)
+        private static async Task<AuthorizeConfigurations> GetAuthorizationConfigurationsAsync(string user)
         {
             AuthorizeConfigurations configs = null;
             var client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(url + "authorize/" + user);
+            HttpResponseMessage response = await client.GetAsync(Url + "authorize/" + user);
             if (response.IsSuccessStatusCode)
                 configs = await response.Content.ReadAsAsync<AuthorizeConfigurations>();
 
@@ -55,14 +56,14 @@ namespace SyncService
         {
             var authorizationParams = await GetAuthorizationConfigurationsAsync(user);
 
-            var configuratons = Configurations.GetInstance();
+            var configuration = Configurations.GetInstance();
 
-            GoogleCalendarAdapter.Authorize(authorizationParams, configuratons.CalendarId);
+            GoogleCalendarAdapter.Authorize(authorizationParams, configuration.CalendarId, !configuration.ShowSummary);
             var googleCalendar = GoogleCalendarAdapter.GetInstance();
             var outlookCalendar = OutlookCalendarAdapter.GetInstance();
-            var teamUpCalendar = new TeamUpCalendarAdapter(authorizationParams.CalendarKey, configuratons.TeamUpCalendarId);
+            var teamUpCalendar = new TeamUpCalendarAdapter(authorizationParams.CalendarKey, configuration.TeamUpCalendarId);
 
-            if (configuratons.ShowSummary)
+            if (configuration.ShowSummary)
                 outlookCalendar.ShowSummary();
             else
                 outlookCalendar.HideSummary();
@@ -93,7 +94,7 @@ namespace SyncService
                     },
                 };
 
-            var synchronizer = new Synchronizer.Synchronizer(calendars, syncAppointments, !configuratons.ShowSummary);
+            var synchronizer = new Synchronizer.Synchronizer(calendars, syncAppointments, !configuration.ShowSummary);
 
             synchronizer.SyncExistedAppointments();
 

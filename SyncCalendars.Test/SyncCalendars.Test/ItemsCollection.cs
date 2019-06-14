@@ -1,4 +1,4 @@
-﻿using Synchronizer;
+﻿using Synchronizer.Models;
 using System;
 using System.Collections.Generic;
 
@@ -27,7 +27,7 @@ namespace SyncCalendars.Test
                     Attendees = new List<string>(),
                     Date = new AppointmentDate(new DateTime(2019, 4, 29, 15, 0, 0), new DateTime(2019, 4, 29, 15, 30, 0)),
                     Description = "changedDescription_2",
-                    Location = "location_2",
+                    Location = "",
                     Subject = "subject_2",
                     Updated = new DateTime(2019, 4, 28, 15, 30, 0)
                 }
@@ -63,7 +63,7 @@ namespace SyncCalendars.Test
                     Attendees = new List<string>(),
                     Date = new AppointmentDate(new DateTime(2019, 4, 29, 15, 0, 0), new DateTime(2019, 4, 29, 15, 30, 0)),
                     Description = "description_2",
-                    Location = "location_2",
+                    Location = null,
                     Subject = "subject_2",
                     Updated = new DateTime(2019, 4, 28, 16, 00, 0)
                 }
