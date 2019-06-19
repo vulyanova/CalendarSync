@@ -1,4 +1,4 @@
-﻿namespace ConfigurationsServer
+﻿namespace ConfigurationsServer.Models
 {
     public class Calendar
     {

@@ -157,4 +157,3 @@ C:\Projects\SyncService\SyncService\obj\Debug\SyncService.exe
 C:\Projects\SyncService\SyncService\obj\Debug\SyncService.pdb
 C:\Projects\SyncService\SyncService\bin\Debug\DnsClient.xml
 C:\Projects\SyncService\SyncService\bin\Debug\System.Buffers.xml
-C:\Projects\SyncService\SyncService\obj\Debug\SyncService.csprojAssemblyReference.cache

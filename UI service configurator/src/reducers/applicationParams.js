@@ -74,6 +74,10 @@ export const applicationParams = (state = initialState, action) => {
                 ...state,
                 isLoading: true
             }
+        case 'ADD_HISTORY':
+            return {
+                ...state
+            }
         default:
             return state;
     }

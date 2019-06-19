@@ -10,7 +10,7 @@ namespace SyncCalendars.Test
 {
     public class MongoDbTests
     {
-        private const string TestUser = "calendarTests";
+        private const string TestUser = "calendartests";
         private static readonly MongoDbAdapter _db = new MongoDbAdapter(TestUser);
 
         private static async Task CleanTestUserDb()
@@ -31,7 +31,8 @@ namespace SyncCalendars.Test
             var syncItem = new MainSyncItem()
             {
                 GoogleId = expected,
-                OutlookId = "outlookTest"
+                OutlookId = "outlookTest",
+                TeamUpId = "teamUp"
             };
 
             await _db.Add(syncItem);

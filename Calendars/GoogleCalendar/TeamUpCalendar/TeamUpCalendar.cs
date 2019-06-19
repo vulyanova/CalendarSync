@@ -13,7 +13,7 @@ namespace Calendars.TeamUpCalendar
         private readonly string _apiKey = "0ad07f8905ca44f73a62048fcf3aaf7c485dec5c036d5647806daa4bb6157b94";
         public string CalendarKey { get; private set; }
         public int CalendarId;
-        private readonly HttpClient client = new HttpClient();
+        private readonly HttpClient _client = new HttpClient();
         public readonly string Url = "https://api.teamup.com/";
 
         public TeamUpCalendar(string calendarKey, int calendarId)
@@ -35,7 +35,6 @@ namespace Calendars.TeamUpCalendar
                 subcalendar_id = CalendarId
             };
 
-            var client = new HttpClient();
             var httpRequestMessage = new HttpRequestMessage
             {
                 Method = HttpMethod.Post,
@@ -46,7 +45,7 @@ namespace Calendars.TeamUpCalendar
                 Content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json")
             };
 
-            var response = client.SendAsync(httpRequestMessage).Result;
+            var response = _client.SendAsync(httpRequestMessage).Result;
             var result = await response.Content.ReadAsStringAsync();
 
             dynamic json = JsonConvert.DeserializeObject(result);
@@ -69,7 +68,6 @@ namespace Calendars.TeamUpCalendar
                 subcalendar_id = CalendarId
             };
 
-            var client = new HttpClient();
             var httpRequestMessage = new HttpRequestMessage
             {
                 Method = HttpMethod.Put,
@@ -80,7 +78,7 @@ namespace Calendars.TeamUpCalendar
                 Content = new StringContent(JsonConvert.SerializeObject(data), Encoding.UTF8, "application/json")
             };
 
-            var response = client.SendAsync(httpRequestMessage).Result;
+            var response = _client.SendAsync(httpRequestMessage).Result;
             var result = await response.Content.ReadAsStringAsync();
             dynamic json = JsonConvert.DeserializeObject(result);
             appointment.Version = json.@event.version;
@@ -88,7 +86,6 @@ namespace Calendars.TeamUpCalendar
 
         public async Task DeleteAppointment(TeamUpEvent appointment)
         {
-            var client = new HttpClient();
             var httpRequestMessage = new HttpRequestMessage
             {
                 Method = HttpMethod.Delete,
@@ -98,7 +95,7 @@ namespace Calendars.TeamUpCalendar
             }
             };
 
-            var response = client.SendAsync(httpRequestMessage).Result;
+            var response = _client.SendAsync(httpRequestMessage).Result;
             await response.Content.ReadAsStringAsync();
         }
 
@@ -131,11 +128,11 @@ namespace Calendars.TeamUpCalendar
                                 Location = appointment.location,
                                 Description = appointment.notes,
                                 Who = appointment.who,
-                                Start = appointment.start_dt,
-                                End = appointment.end_dt,
+                                Start = (DateTime)appointment.start_dt,
+                                End = (DateTime)appointment.end_dt,
                                 Version = appointment.version,
                                 Title = appointment.title,
-                                Update = appointment.update_dt ?? appointment.creation_dt
+                                Update = appointment.update_dt!=null? (DateTime)appointment.update_dt : (DateTime)appointment.creation_dt
                             };
 
                             list.Add(teamUpEvent);

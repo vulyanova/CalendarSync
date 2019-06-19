@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Synchronizer.Models;
 
-namespace ConfigurationsServer
+namespace ConfigurationsServer.Models
 {
     public class State
     {

@@ -5,6 +5,7 @@ using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ConfigurationsServer.Models;
 using Synchronizer.Models;
 
 namespace ConfigurationsServer.Controllers
@@ -13,6 +14,7 @@ namespace ConfigurationsServer.Controllers
     public class HistoryController : Controller
     {
         private const string Collection = "History";
+
         [EnableCors("Policy")]
         [HttpPost("{user}/{type}")]
         public async Task PushLog(string user, int type, [FromBody] Appointment appointment )
@@ -32,30 +34,29 @@ namespace ConfigurationsServer.Controllers
             var userCollectionCursor = await collection.FindAsync(item => item.User == user);
             var userCollection = await userCollectionCursor.ToListAsync();
 
-            return GetUiLogs(userCollection);
+            return userCollection.Select(item => new UiLog(item)).ToList();
         }
 
         [EnableCors("Policy")]
-        [HttpGet]
-        public async Task<List<UiLog>> GetLogs()
+        [HttpGet ("{size}/{page}")]
+        public async Task<List<UiLog>> GetLogs(int size, int page)
         {
             var collection = GetLogCollection();
-            var userCollection = await collection.AsQueryable().ToListAsync();
 
-            return GetUiLogs(userCollection);
+            var userCollection = await collection
+                .Find(FilterDefinition<Log>.Empty)
+                .Skip((page - 1) * size)
+                .Limit(size)
+                .Sort("{Time: -1}")
+                .ToListAsync();
+
+            return userCollection.Select(item => new UiLog(item)).ToList(); 
         }
 
         private static IMongoCollection<Log> GetLogCollection()
         {
             var database = new MongoDatabase();
             return database.GetDatabase().GetCollection<Log>(Collection);
-        }
-
-        private static List<UiLog> GetUiLogs(IEnumerable<Log> logs)
-        {
-            var sorted = logs.OrderByDescending(item => item.Time);
-
-            return sorted.Select(item => new UiLog(item)).ToList();
         }
     }
 }

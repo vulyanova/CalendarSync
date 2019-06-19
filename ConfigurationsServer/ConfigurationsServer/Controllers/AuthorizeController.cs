@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace ConfigurationsServer.Controllers
 {
-
     [Route("api/[controller]/")]
     public class AuthorizeController : Controller
     {

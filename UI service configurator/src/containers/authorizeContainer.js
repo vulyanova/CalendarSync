@@ -12,7 +12,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => {
     return {
         authorize: (authorizationParams) => dispatch(authorize(authorizationParams)),
-        getHistory: (user) => dispatch(getHistory(user))
+        getHistory: (size, page) => dispatch(getHistory(size, page))
     }
 }
 

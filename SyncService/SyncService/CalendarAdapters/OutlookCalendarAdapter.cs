@@ -152,7 +152,6 @@ namespace SyncService.CalendarAdapters
             item.Save();
             item.Send();
 
-
             var id = item.GlobalAppointmentID;
 
             _items.Add(item);

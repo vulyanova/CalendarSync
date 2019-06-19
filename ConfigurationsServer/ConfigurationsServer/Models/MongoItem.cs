@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using Synchronizer.Models;
 
-namespace SyncService.DbAdapters.MongoDbAdapter
+namespace ConfigurationsServer.Models
 {
     public class MongoItem
     {

@@ -16,8 +16,9 @@ const Authorize = (props) => {
             </button>
 
             <button onClick={() => {
-                const user = "vika";
-                props.getHistory(user);
+                const size = 20;
+                const page = 1;
+                props.getHistory(size, page);
             }}>
                 Get History
             </button>

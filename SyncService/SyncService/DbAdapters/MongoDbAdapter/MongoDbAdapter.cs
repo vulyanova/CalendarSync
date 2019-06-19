@@ -1,68 +1,56 @@
-﻿using Databases;
-using MongoDB.Driver;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Net.Http;
 using Synchronizer.Models;
 
 namespace SyncService.DbAdapters.MongoDbAdapter
 {
     public class MongoDbAdapter : IDbInteraction
     {
-        private readonly IMongoCollection<MongoItem> _collection;
+        private const string Url = "https://localhost:5001/api/connection/";
+        private readonly string _collection;
 
         public MongoDbAdapter(string collection)
         {
-            var database = new MongoDatabase().GetDatabase();
-
-            _collection = database.GetCollection<MongoItem>(collection);
+            _collection = collection;
         }
 
         public async Task Add(MainSyncItem syncAppointment)
         {
-            var item = new MongoItem(syncAppointment);
-
-            await _collection.InsertOneAsync(item);
+            var client = new HttpClient();
+            await client.PostAsJsonAsync(Url + _collection, syncAppointment);
         }
 
         public async Task<List<MainSyncItem>> GetCalendarItems()
         {
             var result = new List<MainSyncItem>();
-            var items = await _collection.FindAsync(item => item.GoogleId != null);
+            var client = new HttpClient();
+            var response = await client.GetAsync(Url + _collection);
 
-            foreach (var item in items.ToEnumerable())
-            {
-                result.Add(new MainSyncItem
-                {
-                    GoogleId = item.GoogleId,
-                    OutlookId = item.OutlookId,
-                    TeamUpId = item.TeamUpId
-                });
-            }
+            if (response.IsSuccessStatusCode)
+                result = await response.Content.ReadAsAsync<List<MainSyncItem>>();
+
             return result;
         }
 
         public async Task Remove(MainSyncItem syncAppointment)
         {
-            await _collection.DeleteOneAsync(item => item.GoogleId == syncAppointment.GoogleId);
-        }
-
-        public async Task Save()
-        {
-            await Task.CompletedTask;
+            var client = new HttpClient();
+            await client.DeleteAsync(Url + _collection + "/"+syncAppointment.GoogleId);
         }
 
         public async Task Synchronize(List<MainSyncItem> syncAppointments)
         {
             var items = await GetCalendarItems();
 
-            foreach (var item in items)
-                if (syncAppointments.All(connection => connection.GoogleId != item.GoogleId))
-                    await Remove(item);
-
             foreach (var syncAppointment in syncAppointments)
                 if (items.All(connection => connection.GoogleId != syncAppointment.GoogleId))
                     await Add(syncAppointment);
+
+            foreach (var item in items)
+                if (syncAppointments.All(connection => connection.GoogleId != item.GoogleId))
+                    await Remove(item);
 
         }
     }

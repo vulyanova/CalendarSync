@@ -9,6 +9,11 @@ export const history = (state = initialState, action) => {
                 ...state,
                 calendars: action.calendars
             }
+        case 'ADD_HISTORY_CALENDARS':
+            return {
+                ...state,
+                calendars: [...state.calendars, ...action.calendars]
+            }
         default:
             return state;
     }

@@ -5,12 +5,12 @@ export function* getHistorySaga() {
     yield takeLatest('GET_HISTORY', workerSaga);
 }
 
-function getHistory(user) {
-    return axios.get('https://localhost:5001/api/history/');
+function getHistory(size, page) {
+    return axios.get('https://localhost:5001/api/history/' + size + '/' + page);
 }
 
 function* workerSaga(action) {
-    const response = yield call(getHistory, action.user);
+    const response = yield call(getHistory, action.size, action.page);
     const calendars = response.data;
 
     yield put({ type: "CHANGE_HISTORY_CALENDARS", calendars })

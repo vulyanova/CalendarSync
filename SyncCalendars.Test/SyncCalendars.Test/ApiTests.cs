@@ -7,7 +7,7 @@ namespace SyncCalendars.Test
 {
     public class ApiTests
     {
-        private static readonly AuthorizeConfigurations _configs = new AuthorizeConfigurations
+        private static readonly AuthorizeConfigurations Configs = new AuthorizeConfigurations
         {
             User = "calendarTestUser",
             ClientId = "clientId",
@@ -16,30 +16,26 @@ namespace SyncCalendars.Test
             RefreshToken = "refreshToken"
         };
 
-        private static readonly string _url = "https://localhost:5001/api/";
+        private const string Url = "https://localhost:5001/api/";
 
         private static async Task<HttpResponseMessage> GetApiResponseAsync(string path)
         {
             var client = new HttpClient();
-            var response = await client.GetAsync(_url + path);
+            var response = await client.GetAsync(Url + path);
            
             return response;
         }
 
-        private static async Task<HttpResponseMessage> PostApiResponseAsync(string path, AuthorizeConfigurations configs)
+        private static async Task PostApiResponseAsync(string path, AuthorizeConfigurations configs)
         {
             var client = new HttpClient();
-            var response = await client.PostAsJsonAsync(_url + path, configs);
-
-            return response;
+            await client.PostAsJsonAsync(Url + path, configs);
         }
 
-        private static async Task<HttpResponseMessage> DeleteApiResponseAsync(string path, string user)
+        private static async Task DeleteApiResponseAsync(string path, string user)
         {
             var client = new HttpClient();
-            var response = await client.DeleteAsync(_url + path + user);
-
-            return response;
+            await client.DeleteAsync(Url + path + user);
         }
 
         [Fact]
@@ -50,11 +46,11 @@ namespace SyncCalendars.Test
             var response = await GetApiResponseAsync(url);
             var list = await response.Content.ReadAsAsync<string[]>();
 
-            await PostApiResponseAsync(url, _configs);
+            await PostApiResponseAsync(url, Configs);
             response = await GetApiResponseAsync(url);
             var listWithAdded = await response.Content.ReadAsAsync<string[]>();
 
-            await DeleteApiResponseAsync(url, _configs.User);
+            await DeleteApiResponseAsync(url, Configs.User);
             response = await GetApiResponseAsync(url);
             var listWithoutAdded = await response.Content.ReadAsAsync<string[]>();
 

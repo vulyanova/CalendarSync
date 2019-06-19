@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using ConfigurationsServer.Models;
 
 namespace ConfigurationsServer.Controllers
 {

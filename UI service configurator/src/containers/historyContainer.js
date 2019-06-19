@@ -1,12 +1,14 @@
 ﻿import { connect } from 'react-redux';
 import History from '../components/History';
 import {
-    changeHistoryState
+    changeHistoryState,
+    addHistoryState
 } from '../actions'
 
 const mapDispatchToProps = dispatch => {
     return {
-        changeHistoryState: () => dispatch(changeHistoryState())
+        changeHistoryState: () => dispatch(changeHistoryState()),
+        addHistoryState: (size, page) => dispatch(addHistoryState(size, page))
     }
 }
 

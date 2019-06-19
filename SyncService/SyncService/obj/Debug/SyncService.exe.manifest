@@ -49,7 +49,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ako98qwCeXw7JkGADx6Q0D5lkkf9SL8S2i2bSdLuRdw=</dsig:DigestValue>
+        <dsig:DigestValue>/MConiMJrA5B+PlCaGOZ7kOVt0T+z/2BXX0n4Z2slec=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -163,37 +163,37 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MongoDB.Bson.dll" size="458752">
-      <assemblyIdentity name="MongoDB.Bson" version="2.8.1.0" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="MongoDB.Bson" version="2.8.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ZknP2XH6UWqKDEX8rKAS/RpjT06eEC0hjM2ORX8hk1M=</dsig:DigestValue>
+        <dsig:DigestValue>XX2o9MGn2RvrizpsmgONLidBFsEcleA/MLEld22JYSo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MongoDB.Driver.dll" size="670720">
-      <assemblyIdentity name="MongoDB.Driver" version="2.8.1.0" language="neutral" processorArchitecture="msil" />
+      <assemblyIdentity name="MongoDB.Driver" version="2.8.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>4lk3SMhYPhsyGTsoD7yP3lhPgaSH1INTj31GNwHr6gg=</dsig:DigestValue>
+        <dsig:DigestValue>cPv69w/RNI+mv6tDihETz6Vuy3CucAGxzFhjtkCtURE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MongoDB.Driver.Core.dll" size="771072">
-      <assemblyIdentity name="MongoDB.Driver.Core" version="2.8.1.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MongoDB.Driver.Core.dll" size="770560">
+      <assemblyIdentity name="MongoDB.Driver.Core" version="2.8.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>EcO/NwgnOwctKGZU9L+tR3oeZAqPSSbHZ6HIcQNy+W0=</dsig:DigestValue>
+        <dsig:DigestValue>rHlxFZHsg6E8ND4NIJgop9XwpPhXVkmUk9NF+2er40U=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -234,14 +234,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SyncService.exe" size="52224">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SyncService.exe" size="49664">
       <assemblyIdentity name="SyncService" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>yavwWInUFvQirMepAOzPeIq8uJtedD9uGI3nmUj0LiE=</dsig:DigestValue>
+        <dsig:DigestValue>pNSFxz0wXgoj1NsejRvCHHQMLU16T1s2qvla3mkQZHk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

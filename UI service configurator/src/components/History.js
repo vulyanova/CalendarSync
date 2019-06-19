@@ -1,5 +1,5 @@
-﻿import React from 'react';
-
+﻿import React, {useState} from 'react';
+import useInfiniteScroll from '../useInfiniteScroll';
 
 const Events = ({ events}) => (
      <tbody>
@@ -12,8 +12,8 @@ const Events = ({ events}) => (
     </tbody>
 );
 
-
-const Event = ({ event , value}) => (
+const Event = ({ event , value}) => {
+    return (
     <tr >
         <td >{event.user} </td>  
         <td >{event.time} </td> 
@@ -22,11 +22,12 @@ const Event = ({ event , value}) => (
         <State item = {event.previousState}/> 
         <State item = {event.presentState}/> 
     </tr>
-);
+    )
+};
 
 const State = ({ item }) => (
     <td className="state" >
-         <span> {item.subject} </span>
+         <span>{item.subject}</span>
          <span>{item.description}</span>
          <span>{item.location}</span>
          <span>{item.attendees}</span>
@@ -34,25 +35,36 @@ const State = ({ item }) => (
     </td>
 );
 
-
 const History = (props) => {
+    const [page, incPage] = useState(2);
+    const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
+
+    function fetchMoreListItems() {
+        let size = 20;
+        props.addHistoryState(size, page);
+        incPage(page + 1);
+        setIsFetching(false);   
+    }
+    
     return (
-        <table className = "logs">
-            <thead>
-                <tr>
-                <th>User</th>
-                <th>Updated</th>
-                <th>Calendar</th>
-                <th>Action</th>
-                <th>Previous state</th>
-                <th>Current state</th>
-                </tr>
-            </thead>
-            <Events events={props.calendars} />    
-        </table>
+        <div>
+            <table className = "logs">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Updated</th>
+                        <th>Calendar</th>
+                        <th>Action</th>
+                        <th>Previous state</th>
+                        <th>Current state</th>
+                    </tr>
+                </thead>
+                <Events events={props.calendars} />               
+            </table>
+            {isFetching && 'Fetching logs...'}
+        </div>
     )
 }
-
 
 export default History;
 

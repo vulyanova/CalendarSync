@@ -1,6 +1,6 @@
 ﻿using Synchronizer.Models;
 
-namespace ConfigurationsServer
+namespace ConfigurationsServer.Models
 {
     public class UiLog
     {
