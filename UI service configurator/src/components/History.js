@@ -38,9 +38,9 @@ const State = ({ item }) => (
 const History = (props) => {
     const [page, incPage] = useState(2);
     const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
+    const size = 20;
 
     function fetchMoreListItems() {
-        let size = 20;
         props.addHistoryState(size, page);
         incPage(page + 1);
         setIsFetching(false);   

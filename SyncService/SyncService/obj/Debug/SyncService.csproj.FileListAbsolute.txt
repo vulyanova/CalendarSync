@@ -111,9 +111,6 @@ C:\Projects\SyncService\SyncService\bin\Debug\Google.Apis.Calendar.v3.dll
 C:\Projects\SyncService\SyncService\bin\Debug\Google.Apis.Core.dll
 C:\Projects\SyncService\SyncService\bin\Debug\Google.Apis.dll
 C:\Projects\SyncService\SyncService\bin\Debug\Google.Apis.PlatformServices.dll
-C:\Projects\SyncService\SyncService\bin\Debug\MongoDB.Bson.dll
-C:\Projects\SyncService\SyncService\bin\Debug\MongoDB.Driver.Core.dll
-C:\Projects\SyncService\SyncService\bin\Debug\MongoDB.Driver.dll
 C:\Projects\SyncService\SyncService\bin\Debug\Newtonsoft.Json.dll
 C:\Projects\SyncService\SyncService\bin\Debug\Synchronizer.dll
 C:\Projects\SyncService\SyncService\bin\Debug\System.Configuration.ConfigurationManager.dll
@@ -123,6 +120,9 @@ C:\Projects\SyncService\SyncService\bin\Debug\System.Security.AccessControl.dll
 C:\Projects\SyncService\SyncService\bin\Debug\System.Security.Permissions.dll
 C:\Projects\SyncService\SyncService\bin\Debug\System.Security.Principal.Windows.dll
 C:\Projects\SyncService\SyncService\bin\Debug\System.ServiceProcess.ServiceController.dll
+C:\Projects\SyncService\SyncService\bin\Debug\MongoDB.Bson.dll
+C:\Projects\SyncService\SyncService\bin\Debug\MongoDB.Driver.dll
+C:\Projects\SyncService\SyncService\bin\Debug\MongoDB.Driver.Core.dll
 C:\Projects\SyncService\SyncService\bin\Debug\DnsClient.dll
 C:\Projects\SyncService\SyncService\bin\Debug\System.Buffers.dll
 C:\Projects\SyncService\SyncService\bin\Debug\Calendars.pdb
@@ -137,13 +137,15 @@ C:\Projects\SyncService\SyncService\bin\Debug\Google.Apis.Calendar.v3.pdb
 C:\Projects\SyncService\SyncService\bin\Debug\Google.Apis.Calendar.v3.xml
 C:\Projects\SyncService\SyncService\bin\Debug\Google.Apis.Core.pdb
 C:\Projects\SyncService\SyncService\bin\Debug\Google.Apis.Core.xml
-C:\Projects\SyncService\SyncService\bin\Debug\MongoDB.Bson.xml
-C:\Projects\SyncService\SyncService\bin\Debug\MongoDB.Driver.xml
-C:\Projects\SyncService\SyncService\bin\Debug\MongoDB.Driver.Core.xml
 C:\Projects\SyncService\SyncService\bin\Debug\Newtonsoft.Json.xml
 C:\Projects\SyncService\SyncService\bin\Debug\Synchronizer.pdb
 C:\Projects\SyncService\SyncService\bin\Debug\Synchronizer.dll.config
 C:\Projects\SyncService\SyncService\bin\Debug\System.Net.Http.Formatting.xml
+C:\Projects\SyncService\SyncService\bin\Debug\MongoDB.Bson.xml
+C:\Projects\SyncService\SyncService\bin\Debug\MongoDB.Driver.xml
+C:\Projects\SyncService\SyncService\bin\Debug\MongoDB.Driver.Core.xml
+C:\Projects\SyncService\SyncService\bin\Debug\DnsClient.xml
+C:\Projects\SyncService\SyncService\bin\Debug\System.Buffers.xml
 C:\Projects\SyncService\SyncService\obj\Debug\SyncService.exe.config
 C:\Projects\SyncService\SyncService\obj\Debug\SyncService.ProjectInstaller.resources
 C:\Projects\SyncService\SyncService\obj\Debug\SyncService.SyncService.resources
@@ -155,5 +157,3 @@ C:\Projects\SyncService\SyncService\obj\Debug\SyncService.application
 C:\Projects\SyncService\SyncService\obj\Debug\SyncService.csproj.CopyComplete
 C:\Projects\SyncService\SyncService\obj\Debug\SyncService.exe
 C:\Projects\SyncService\SyncService\obj\Debug\SyncService.pdb
-C:\Projects\SyncService\SyncService\bin\Debug\DnsClient.xml
-C:\Projects\SyncService\SyncService\bin\Debug\System.Buffers.xml

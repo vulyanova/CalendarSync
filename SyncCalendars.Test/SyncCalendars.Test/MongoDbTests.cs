@@ -1,6 +1,4 @@
-﻿using Synchronizer;
-using SyncService;
-using SyncService.DbAdapters.MongoDbAdapter;
+﻿using SyncService.DbAdapters.MongoDbAdapter;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Synchronizer.Models;
@@ -11,14 +9,14 @@ namespace SyncCalendars.Test
     public class MongoDbTests
     {
         private const string TestUser = "calendartests";
-        private static readonly MongoDbAdapter _db = new MongoDbAdapter(TestUser);
+        private static readonly MongoDbAdapter Db = new MongoDbAdapter(TestUser);
 
         private static async Task CleanTestUserDb()
         {
-            var items = await _db.GetCalendarItems();
+            var items = await Db.GetCalendarItems();
 
             foreach (var item in items)
-                await _db.Remove(item);
+                await Db.Remove(item);
         }
 
         [Fact]
@@ -35,9 +33,9 @@ namespace SyncCalendars.Test
                 TeamUpId = "teamUp"
             };
 
-            await _db.Add(syncItem);
+            await Db.Add(syncItem);
 
-            var items = await _db.GetCalendarItems();
+            var items = await Db.GetCalendarItems();
 
             Assert.Equal(expected, items[0].GoogleId);
         }
@@ -54,7 +52,7 @@ namespace SyncCalendars.Test
                 OutlookId = "outlook"
             };
 
-            await _db.Add(oldItem);
+            await Db.Add(oldItem);
 
             var expected = "googleTest1";
             var syncList = new List<MainSyncItem> {
@@ -65,9 +63,9 @@ namespace SyncCalendars.Test
                 }
             };
 
-            await _db.Synchronize(syncList);
+            await Db.Synchronize(syncList);
 
-            var items = await _db.GetCalendarItems();
+            var items = await Db.GetCalendarItems();
 
             Assert.Single(items);
 

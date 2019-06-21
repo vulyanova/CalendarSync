@@ -33,6 +33,8 @@ namespace Synchronizer
 
         public void SyncExistedAppointments()
         {
+            var deletedAppointment = new List<MainSyncItem>();
+
             foreach (var item in _existedAppointments)
             {
                 var appointments = GetEqualAppointments(item);
@@ -42,9 +44,16 @@ namespace Synchronizer
                     foreach (var appointment in appointments)
                         if (appointment != null)
                             appointment.AppointmentStatus = Appointment.Status.Deleted;
+
+                    deletedAppointment.Add(item);
                 }
                 else
                     ModifyAppointment(appointments);
+            }
+
+            foreach (var item in deletedAppointment)
+            {
+                _existedAppointments.Remove(item);
             }
         }
 
@@ -54,14 +63,18 @@ namespace Synchronizer
 
             foreach (var calendar in Calendars)
             {
-                if (calendar.Type == CalendarType.Google)
-                    equalAppointments.Add(calendar.Appointments.FirstOrDefault(gItem => gItem.Id == calendarItem.GoogleId));
-
-                if (calendar.Type == CalendarType.Outlook)
-                    equalAppointments.Add(calendar.Appointments.FirstOrDefault(gItem => gItem.Id == calendarItem.OutlookId));
-
-                if (calendar.Type == CalendarType.TeamUp)
-                    equalAppointments.Add(calendar.Appointments.FirstOrDefault(gItem => gItem.Id == calendarItem.TeamUpId));
+                switch (calendar.Type)
+                {
+                    case CalendarType.Google:
+                        equalAppointments.Add(calendar.Appointments.FirstOrDefault(gItem => gItem.Id == calendarItem.GoogleId));
+                        break;
+                    case CalendarType.Outlook:
+                        equalAppointments.Add(calendar.Appointments.FirstOrDefault(gItem => gItem.Id == calendarItem.OutlookId));
+                        break;
+                    case CalendarType.TeamUp:
+                        equalAppointments.Add(calendar.Appointments.FirstOrDefault(gItem => gItem.Id == calendarItem.TeamUpId));
+                        break;
+                }
             }
 
             return equalAppointments;

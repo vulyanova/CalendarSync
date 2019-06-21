@@ -10,27 +10,16 @@ namespace SyncService.CalendarAdapters
 {
     public class GoogleCalendarAdapter: ICalendar
     {
-        private static GoogleCalendarAdapter _instance;
         private readonly GoogleCalendar _calendar;
         private readonly string _calendarId;
         private readonly bool _showSummary;
 
-        private GoogleCalendarAdapter(AuthorizeConfigurations authorizeConfigurations, string calendarId, bool isPrivate)
+        public GoogleCalendarAdapter(AuthorizeConfigurations authorizeConfigurations, string calendarId, bool isPrivate)
         {
             _calendar = new GoogleCalendar(authorizeConfigurations);
             _calendarId = calendarId;
             _calendar.GetService();
             _showSummary = !isPrivate;
-        }
-
-        public static void Authorize(AuthorizeConfigurations authorizeConfigurations, string calendarId, bool isPrivate)
-        {
-            _instance = new GoogleCalendarAdapter(authorizeConfigurations, calendarId, isPrivate);
-        }
-
-        public static GoogleCalendarAdapter GetInstance()
-        {
-            return _instance;
         }
 
         public async Task DeleteAppointmentAsync(Appointment appointment)

@@ -222,26 +222,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Synchronizer.dll" size="11264">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Synchronizer.dll" size="11776">
       <assemblyIdentity name="Synchronizer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>/1XdtSGxmy8JeEkjPbf0HvQSpr07V7PQUc39pL0Ry7g=</dsig:DigestValue>
+        <dsig:DigestValue>yYtcVzvp/+VPF9yB9patutzxhBt0YZz+pBnMMM/am/E=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SyncService.exe" size="49664">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SyncService.exe" size="49152">
       <assemblyIdentity name="SyncService" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>pNSFxz0wXgoj1NsejRvCHHQMLU16T1s2qvla3mkQZHk=</dsig:DigestValue>
+        <dsig:DigestValue>UhNWU8oiKI+c0FvkN2IFBEX77RFNfujAdXsYxRWNulI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1469,13 +1469,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="SyncService.exe.config" size="21393">
+  <file name="SyncService.exe.config" size="21452">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>nScCabCc0cSgAeYhXIprYqYuiL0UVb8EBv85EjCBNNg=</dsig:DigestValue>
+      <dsig:DigestValue>IUaeXzA1AkoA0tKlVxM7xss0M7WAAPexxz9fOTxXUuQ=</dsig:DigestValue>
     </hash>
   </file>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Net.Http;
@@ -7,26 +8,29 @@ using Synchronizer.Models;
 namespace SyncService.DbAdapters.MongoDbAdapter
 {
     public class MongoDbAdapter : IDbInteraction
-    {
-        private const string Url = "https://localhost:5001/api/connection/";
+    { 
+        private readonly string _url;
         private readonly string _collection;
 
         public MongoDbAdapter(string collection)
         {
             _collection = collection;
+            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            _url = config.AppSettings.Settings["Url"].Value+ "connection/";
         }
 
         public async Task Add(MainSyncItem syncAppointment)
         {
             var client = new HttpClient();
-            await client.PostAsJsonAsync(Url + _collection, syncAppointment);
+            await client.PostAsJsonAsync(_url + _collection, syncAppointment);
         }
 
         public async Task<List<MainSyncItem>> GetCalendarItems()
         {
             var result = new List<MainSyncItem>();
             var client = new HttpClient();
-            var response = await client.GetAsync(Url + _collection);
+            var response = await client.GetAsync(_url + _collection);
 
             if (response.IsSuccessStatusCode)
                 result = await response.Content.ReadAsAsync<List<MainSyncItem>>();
@@ -37,7 +41,7 @@ namespace SyncService.DbAdapters.MongoDbAdapter
         public async Task Remove(MainSyncItem syncAppointment)
         {
             var client = new HttpClient();
-            await client.DeleteAsync(Url + _collection + "/"+syncAppointment.GoogleId);
+            await client.DeleteAsync(_url + _collection + "/"+syncAppointment.GoogleId);
         }
 
         public async Task Synchronize(List<MainSyncItem> syncAppointments)

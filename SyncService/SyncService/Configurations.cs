@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Configuration;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace SyncService
@@ -10,8 +11,6 @@ namespace SyncService
         public int TeamUpCalendarId { get; }
         public int Timer { get;  }
         public bool ShowSummary { get;  }
-
-        private const string Url = "https://localhost:5001/api/configurations/";
 
         private static async Task<Configs> GetAuthorizationConfigurationsAsync(string path)
         {
@@ -35,7 +34,10 @@ namespace SyncService
 
         public static async Task GetConfigurations(string user)
         {
-            var configs = await GetAuthorizationConfigurationsAsync(Url + user);
+            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var url = config.AppSettings.Settings["Url"].Value + "configurations/";
+
+            var configs = await GetAuthorizationConfigurationsAsync(url + user);
             _instance = new Configurations(configs);        
         }
 

@@ -1,36 +1,43 @@
 ﻿using Calendars;
-using Synchronizer;
 using SyncService.CalendarAdapters;
 using SyncService.DbAdapters.MongoDbAdapter;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Synchronizer.Models;
 
 namespace SyncService
 {
-    public static class SyncController
+    public class SyncController
     {
-        private const string Url = "https://localhost:5001/api/";
+        private string _url;
 
-        private static async Task PushLogs(string user, int type, Appointment appointment)
+        public SyncController()
         {
-            var client = new HttpClient();
-            await client.PostAsJsonAsync(Url + "history/" + user + "/" + type, appointment);
+            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
+            _url = config.AppSettings.Settings["Url"].Value;
         }
 
-        private static async Task<AuthorizeConfigurations> GetAuthorizationConfigurationsAsync(string user)
+        private async Task PushLogs(string user, int type, Appointment appointment)
+        {
+            var client = new HttpClient();
+            await client.PostAsJsonAsync(_url + "history/" + user + "/" + type, appointment);
+        }
+
+        private async Task<AuthorizeConfigurations> GetAuthorizationConfigurationsAsync(string user)
         {
             AuthorizeConfigurations configs = null;
             var client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(Url + "authorize/" + user);
+            var response = await client.GetAsync(_url + "authorize/" + user);
             if (response.IsSuccessStatusCode)
                 configs = await response.Content.ReadAsAsync<AuthorizeConfigurations>();
 
             return configs;
         }
 
-        private static async Task UpdateCalendar(string user, ICalendar calendar, Calendar appointmentCalendar)
+        private async Task UpdateCalendar(string user, ICalendar calendar, Calendar appointmentCalendar)
         {
             var appointments = appointmentCalendar.Appointments;
 
@@ -52,22 +59,16 @@ namespace SyncService
             }
         }
 
-        public static async Task Sync(string user)
+        public async Task Sync(string user)
         {
             var authorizationParams = await GetAuthorizationConfigurationsAsync(user);
 
             var configuration = Configurations.GetInstance();
-
-            GoogleCalendarAdapter.Authorize(authorizationParams, configuration.CalendarId, !configuration.ShowSummary);
-            var googleCalendar = GoogleCalendarAdapter.GetInstance();
-            var outlookCalendar = OutlookCalendarAdapter.GetInstance();
+            
+            var googleCalendar = new GoogleCalendarAdapter(authorizationParams, configuration.CalendarId, !configuration.ShowSummary);
+            var outlookCalendar = new OutlookCalendarAdapter(configuration.ShowSummary);
             var teamUpCalendar = new TeamUpCalendarAdapter(authorizationParams.CalendarKey, configuration.TeamUpCalendarId);
 
-            if (configuration.ShowSummary)
-                outlookCalendar.ShowSummary();
-            else
-                outlookCalendar.HideSummary();
-            
             var db = new MongoDbAdapter(user);
 
             var syncAppointments = await db.GetCalendarItems();

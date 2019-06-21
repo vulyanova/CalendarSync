@@ -31,9 +31,9 @@ namespace SyncCalendars.Test
 
         public static ICalendar GetCalendar(int index)
         {
-            GoogleCalendarAdapter.Authorize(AuthorizeConfigs, CalendarId, true);
-            var googleCalendar = GoogleCalendarAdapter.GetInstance();
-            var outlookCalendar =OutlookCalendarAdapter.GetInstance();
+
+            var googleCalendar = new GoogleCalendarAdapter(AuthorizeConfigs, CalendarId, true); 
+            var outlookCalendar =new OutlookCalendarAdapter(true);
             var teamUpCalendar = new TeamUpCalendarAdapter("ksjea1t78n1525ka23", 6551483);
             outlookCalendar.ChangeCalendar(OutlookCalendarName);
 

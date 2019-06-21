@@ -46,7 +46,8 @@ namespace SyncService
         public void OnTimer(Timer timer, string user)
         {
             timer.Stop();
-            SyncController.Sync(user).Wait();
+            var controller = new SyncController();
+            controller.Sync(user).Wait();
             timer.Start();
         }
     }

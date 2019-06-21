@@ -9,47 +9,28 @@ namespace SyncService.CalendarAdapters
 {
     public class OutlookCalendarAdapter: ICalendar
     {
-        private static OutlookCalendarAdapter _instance;
         private readonly Application _oApp;
-        private readonly NameSpace _mapiNS;
+        private readonly NameSpace _mapiNs;
         private MAPIFolder _calendarFolder;
         private readonly List<AppointmentItem> _items;
-        private bool _showSummary ;
+        private readonly bool _showSummary ;
         
-        private OutlookCalendarAdapter()
+        public OutlookCalendarAdapter(bool showSummary)
         {
             _oApp = new Application();
-            _mapiNS = _oApp.GetNamespace("MAPI");
+            _mapiNs = _oApp.GetNamespace("MAPI");
             _items = new List<AppointmentItem>();
-            _showSummary = true;
-            var currentFolder = _mapiNS.GetDefaultFolder(OlDefaultFolders.olFolderCalendar);
+            _showSummary = showSummary;
+            var currentFolder = _mapiNs.GetDefaultFolder(OlDefaultFolders.olFolderCalendar);
 
             _calendarFolder = currentFolder;
         }
 
-        public void ShowSummary()
-        {
-            _showSummary = true;
-        }
-
         public void ChangeCalendar(string calendar)
         {
-            var currentFolder = _mapiNS.GetDefaultFolder(OlDefaultFolders.olFolderCalendar);
+            var currentFolder = _mapiNs.GetDefaultFolder(OlDefaultFolders.olFolderCalendar);
 
             _calendarFolder = currentFolder.Folders[calendar];
-        }
-
-        public void HideSummary()
-        {
-            _showSummary = false;
-        }
-
-        public static OutlookCalendarAdapter GetInstance()
-        {
-            if (_instance == null)
-                _instance = new OutlookCalendarAdapter();
-
-            return _instance;
         }
 
         public async Task DeleteAppointmentAsync(Appointment appointment)
@@ -135,7 +116,7 @@ namespace SyncService.CalendarAdapters
         public async Task<string> AddAppointmentAsync(Appointment appointment)
         {
             var profile = "";
-            _mapiNS.Logon(profile, null, null, null);
+            _mapiNs.Logon(profile, null, null, null);
 
             var item = (AppointmentItem)_oApp.CreateItem(OlItemType.olAppointmentItem).Move(_calendarFolder); 
 
@@ -157,16 +138,6 @@ namespace SyncService.CalendarAdapters
             _items.Add(item);
 
             return await Task.FromResult(id);
-        }
-
-        public void Disconnect()
-        {
-            _oApp.Quit();
-            System.Runtime.InteropServices.Marshal.ReleaseComObject(_mapiNS);
-            System.Runtime.InteropServices.Marshal.ReleaseComObject(_oApp);
-            System.Runtime.InteropServices.Marshal.ReleaseComObject(_items);
-
-            _instance = null;
         }
 
     }
