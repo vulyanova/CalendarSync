@@ -5,6 +5,7 @@ using Google.Apis.Calendar.v3;
 using Google.Apis.Calendar.v3.Data;
 using Google.Apis.Services;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -60,6 +61,25 @@ namespace Calendars
             else AuthorizeWithTokens(authorizeConfigs);
         }
 
+        public async Task<List<Calendar>> GetCalendars()
+        {
+            var service = GetService();
+
+            var calendars = await service.CalendarList.List().ExecuteAsync();
+
+            var calendarList = new List<Calendar>();
+
+            foreach (var calendar in calendars.Items)
+            {
+                calendarList.Add(new Calendar()
+                {
+                    Id = calendar.Id,
+                    Name = calendar.Summary
+                });
+            }
+            return calendarList;
+        }
+
         public CalendarService GetService()
         {
             CalendarService = new CalendarService(new BaseClientService.Initializer()
@@ -69,6 +89,7 @@ namespace Calendars
 
             return CalendarService;
         }
+
 
         public async Task DeleteAppointment(string calendarId, string id)
         {

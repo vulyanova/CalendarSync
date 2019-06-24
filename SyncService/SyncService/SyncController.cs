@@ -11,7 +11,7 @@ namespace SyncService
 {
     public class SyncController
     {
-        private string _url;
+        private readonly string _url;
 
         public SyncController()
         {

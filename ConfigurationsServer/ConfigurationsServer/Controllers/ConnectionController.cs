@@ -16,10 +16,10 @@ namespace ConfigurationsServer.Controllers
         [HttpGet ("{user}")]
         public async Task<List<MainSyncItem>> GetCalendarItems(string user)
         {
+            var result = new List<MainSyncItem>();
+
             var database = new MongoDatabase().GetDatabase();
             var collection = database.GetCollection<MongoItem>(user);
-
-            var result = new List<MainSyncItem>();
             var items = await collection.FindAsync(FilterDefinition<MongoItem>.Empty);
 
             foreach (var item in items.ToEnumerable())
@@ -41,6 +41,7 @@ namespace ConfigurationsServer.Controllers
         {
             var database = new MongoDatabase().GetDatabase();
             var collection = database.GetCollection<MongoItem>(user);
+
             await collection.InsertOneAsync(new MongoItem(item));
         }
 
@@ -50,6 +51,7 @@ namespace ConfigurationsServer.Controllers
         {
             var database = new MongoDatabase().GetDatabase();
             var collection = database.GetCollection<MongoItem>(user);
+
             await collection.DeleteOneAsync(item=> googleId==item.GoogleId);
         }
     }

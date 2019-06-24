@@ -1,5 +1,4 @@
 ﻿using System.Configuration;
-using System.Diagnostics;
 using System.ServiceProcess;
 using System.Timers;
 
@@ -35,8 +34,6 @@ namespace SyncService
             timer.Interval = configuration.Timer;
             timer.Enabled = true;
 
-            
-            EventLog.WriteEntry("SyncService","Started");
         }
 
         protected override void OnStop()

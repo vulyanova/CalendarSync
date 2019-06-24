@@ -11,7 +11,8 @@ namespace SyncCalendars.Test
         [Fact]
         public async Task NewAppointments_AddCorrectAmountAsync()
         {
-            var teamUpCalendar = new TeamUpCalendar("ksjea1t78n1525ka23", 6551483);
+            var calendarId = 6551483;
+            var teamUpCalendar = new TeamUpCalendar("ksjea1t78n1525ka23");
             var attendees = "chuvaginavika@gmail.com,chuvaginavika@icloud.com";
 
             var start = DateTime.Now.AddDays(1);
@@ -25,12 +26,12 @@ namespace SyncCalendars.Test
                 Who = attendees
             };
 
-            await teamUpCalendar.AddAppointment(appointment);
+            await teamUpCalendar.AddAppointment(calendarId, appointment);
 
             appointment.Location = "Moscow";
-            await teamUpCalendar.UpdateAppointment(appointment); 
+            await teamUpCalendar.UpdateAppointment(calendarId, appointment); 
 
-            var result = await teamUpCalendar.GetNearestAppointments();
+            var result = await teamUpCalendar.GetNearestAppointments(calendarId);
 
             Assert.True(result != null && 
                         result.Any(item => item.Id == appointment.Id && 

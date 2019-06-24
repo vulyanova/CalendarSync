@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Calendars;
-using ConfigurationsServer.Models;
 using Databases;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -19,21 +17,9 @@ namespace ConfigurationsServer.Controllers
             var authorizeConfigs = await database.GetAuthorizationParametersAsync(user);
 
             var googleCalendar = new GoogleCalendar(authorizeConfigs.ToGoogle());
-            var service = googleCalendar.GetService();
+            var calendars = await googleCalendar.GetCalendars();
 
-            var calendars = service.CalendarList.List().Execute();
-
-            var calendarList = new List<Calendar>();
-
-            foreach (var calendar in calendars.Items)
-            {
-                calendarList.Add(new Calendar()
-                {
-                    Id = calendar.Id,
-                    Name = calendar.Summary
-                });
-            }
-            return calendarList.ToArray();
+            return calendars.ToArray();
         }
 
     }

@@ -9,10 +9,12 @@ namespace SyncService.CalendarAdapters
     public class TeamUpCalendarAdapter : ICalendar
     {
         private readonly TeamUpCalendar _calendar;
+        private readonly int _calendarId;
 
         public TeamUpCalendarAdapter(string calendarKey, int calendarId)
         {
-            _calendar = new TeamUpCalendar(calendarKey, calendarId);
+            _calendarId = calendarId;
+            _calendar = new TeamUpCalendar(calendarKey);
         }
         public async Task<string> AddAppointmentAsync(Appointment appointment)
         {
@@ -27,7 +29,7 @@ namespace SyncService.CalendarAdapters
                 Who = string.Join(",", appointment.Attendees.ToArray())
             };
 
-            await _calendar.AddAppointment(teamUpAppointment);
+            await _calendar.AddAppointment(_calendarId, teamUpAppointment);
 
             appointment.Id = teamUpAppointment.Id;
             appointment.Version = teamUpAppointment.Version;
@@ -49,13 +51,13 @@ namespace SyncService.CalendarAdapters
                 Description = appointment.Description
             };
 
-            await _calendar.DeleteAppointment(teamUpAppointment);
+            await _calendar.DeleteAppointment(_calendarId, teamUpAppointment);
         }
 
         public async Task<List<Appointment>> GetNearestAppointmentsAsync()
         {
             var result = new List<Appointment>();
-            var appointments = await _calendar.GetNearestAppointments();
+            var appointments = await _calendar.GetNearestAppointments(_calendarId);
 
             foreach(var teamUpAppointment in appointments)
             {
@@ -97,7 +99,7 @@ namespace SyncService.CalendarAdapters
                 Who = string.Join(",", appointment.Attendees.ToArray())
             };
 
-            await _calendar.UpdateAppointment(teamUpAppointment);
+            await _calendar.UpdateAppointment(_calendarId, teamUpAppointment);
 
             appointment.Version = teamUpAppointment.Version;
         }
