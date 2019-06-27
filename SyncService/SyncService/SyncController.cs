@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Synchronizer.Models;
+using Calendar = Synchronizer.Models.Calendar;
 
 namespace SyncService
 {

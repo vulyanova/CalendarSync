@@ -39,6 +39,12 @@ namespace ConfigurationsServer.Models
                     PreviousState = new State(appointment.PreviousState);
                     PresentState = new State(appointment);
                     break;
+                case Appointment.Status.Unchecked:
+                    break;
+                case Appointment.Status.Checked:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
     }

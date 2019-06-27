@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Calendars.dll" size="29184">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Calendars.dll" size="32256">
       <assemblyIdentity name="Calendars" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>87YNU4O6C0cePQkbLR0MNgzwSzKlepEqI5tQcRkT1VM=</dsig:DigestValue>
+        <dsig:DigestValue>jqmcR1QzKa4EnaKsyjNcw124OojynNibCV8GN1KWDhM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -241,7 +241,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>l8TnLAzf96ZqzYFN4dlEJwXZ9ki9L33dKfmiHBaqaTg=</dsig:DigestValue>
+        <dsig:DigestValue>L8Ronz5W+YdgNFJwBn5WQdIc39lnBaxYUypdh52Nz3E=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

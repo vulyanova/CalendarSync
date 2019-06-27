@@ -26,7 +26,7 @@ namespace SyncCalendars.Test
             ClientSecret = ClientSecret,
             AccessToken = AccessToken,
             RefreshToken = RefreshToken,
-            User = User
+            User = User 
         };
 
         public static ICalendar GetCalendar(int index)
@@ -68,7 +68,7 @@ namespace SyncCalendars.Test
         [InlineData(0)]
         [InlineData(1)]
         [InlineData(2)]
-        public async Task CalendarsAppointments_AddEvent_SuccessfullAddition(int index)
+        public async Task CalendarsAppointments_AddEvent_SuccessfulAddition(int index)
         {
             var calendar = GetCalendar(index);
 
@@ -100,7 +100,7 @@ namespace SyncCalendars.Test
         [InlineData(0)]
         [InlineData(1)]
         [InlineData(2)]
-        public async Task CalendarsAppointments_UpdateEventTime_SuccessfullUpdating(int index)
+        public async Task CalendarsAppointments_UpdateEventTime_SuccessfulUpdating(int index)
         {
             var calendar = GetCalendar(index);
 

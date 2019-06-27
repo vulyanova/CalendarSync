@@ -1,5 +1,4 @@
 ﻿using Databases;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using System.Collections.Generic;
@@ -15,7 +14,6 @@ namespace ConfigurationsServer.Controllers
     {
         private const string Collection = "History";
 
-        [EnableCors("Policy")]
         [HttpPost("{user}/{type}")]
         public async Task PushLog(string user, int type, [FromBody] Appointment appointment )
         {
@@ -25,7 +23,6 @@ namespace ConfigurationsServer.Controllers
             await collection.InsertOneAsync(log);
         }
 
-        [EnableCors("Policy")]
         [HttpGet("{user}")]
         public async Task<List<UiLog>> GetUserLogs(string user)
         {
@@ -37,7 +34,7 @@ namespace ConfigurationsServer.Controllers
             return userCollection.Select(item => new UiLog(item)).ToList();
         }
 
-        [EnableCors("Policy")]
+
         [HttpGet ("{size}/{page}")]
         public async Task<List<UiLog>> GetLogs(int size, int page)
         {
@@ -45,7 +42,7 @@ namespace ConfigurationsServer.Controllers
 
             var userCollection = await collection
                 .Find(FilterDefinition<Log>.Empty)
-                .Skip((page - 1) * size)
+                .Skip((page-1) * size)
                 .Limit(size)
                 .Sort("{Time: -1}")
                 .ToListAsync();

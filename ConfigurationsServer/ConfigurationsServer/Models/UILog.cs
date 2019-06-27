@@ -1,4 +1,5 @@
-﻿using Synchronizer.Models;
+﻿using System;
+using Synchronizer.Models;
 
 namespace ConfigurationsServer.Models
 {
@@ -10,13 +11,14 @@ namespace ConfigurationsServer.Models
         public string Action;
         public UiState PreviousState;
         public UiState PresentState;
+        private const string DateTemplate = "dd/MM/yyyy HH:mm";
 
         public UiLog(Log log)
         {
             User = log.User;
-            Time = log.Time.ToLocalTime().ToString("dd/MM/yyyy HH:mm");
-            PreviousState = new UiState(log.PreviousState);
-            PresentState = new UiState(log.PresentState);
+            Time = log.Time.ToLocalTime().ToString(DateTemplate);
+            PreviousState = new UiState(log.PreviousState, DateTemplate);
+            PresentState = new UiState(log.PresentState, DateTemplate);
 
             switch (log.Calendar)
             {
@@ -29,6 +31,8 @@ namespace ConfigurationsServer.Models
                 case CalendarType.TeamUp:
                     Calendar = "TeamUp";
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
 
             switch (log.Action)
@@ -42,6 +46,8 @@ namespace ConfigurationsServer.Models
                 case Log.AppointmentAction.Updated:
                     Action = "Updated";
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
     }

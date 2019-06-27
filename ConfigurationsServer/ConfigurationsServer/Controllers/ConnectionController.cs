@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using ConfigurationsServer.Models;
 using Databases;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 using Synchronizer.Models;
@@ -12,7 +11,6 @@ namespace ConfigurationsServer.Controllers
     [Route("api/[controller]/")]
     public class ConnectionController : Controller
     {
-        [EnableCors("Policy")]
         [HttpGet ("{user}")]
         public async Task<List<MainSyncItem>> GetCalendarItems(string user)
         {
@@ -35,7 +33,6 @@ namespace ConfigurationsServer.Controllers
             return result;
         }
 
-        [EnableCors("Policy")]
         [HttpPost("{user}")]
         public async Task AddItem(string user, [FromBody] MainSyncItem item)
         {
@@ -45,7 +42,6 @@ namespace ConfigurationsServer.Controllers
             await collection.InsertOneAsync(new MongoItem(item));
         }
 
-        [EnableCors("Policy")]
         [HttpDelete("{user}/{googleId}")]
         public async Task DeleteItem(string user, string googleId)
         {

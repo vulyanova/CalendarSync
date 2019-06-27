@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Calendars;
+using Calendars.GoogleCalendar;
 using Databases;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ConfigurationsServer.Controllers
@@ -9,7 +9,6 @@ namespace ConfigurationsServer.Controllers
     [Route("api/[controller]/")]
     public class CalendarsController : Controller
     {
-        [EnableCors("Policy")]
         [HttpGet("{user}")]
         public async Task<Calendar[]> GetCalendars(string user)
         {

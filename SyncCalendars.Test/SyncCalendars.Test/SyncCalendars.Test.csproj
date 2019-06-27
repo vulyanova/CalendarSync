@@ -103,7 +103,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiTests.cs" />
     <Compile Include="ConnectionsCollection.cs" />
     <Compile Include="CalendarTests.cs" />
     <Compile Include="DbSynchronizerTests.cs" />

@@ -1,15 +1,13 @@
-﻿using Calendars;
-using Databases;
-using Microsoft.AspNetCore.Cors;
+﻿using Databases;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Calendars.GoogleCalendar;
 
 namespace ConfigurationsServer.Controllers
 {
     [Route("api/[controller]/")]
     public class AuthorizeController : Controller
     {
-        [EnableCors("Policy")]
         [HttpGet]
         public string[] GetAuthorizedUsers()
         {
@@ -17,9 +15,8 @@ namespace ConfigurationsServer.Controllers
             return database.GetAuthorizedUsers().ToArray();
         }
 
-        [EnableCors("Policy")]
         [HttpPost]
-        public async Task<Databases.AuthorizeConfigurations> PostAuthorizeConfigurations([FromBody] Databases.AuthorizeConfigurations authorizeConfigs)
+        public async Task<AuthorizeConfigurations> PostAuthorizeConfigurations([FromBody] Databases.AuthorizeConfigurations authorizeConfigs)
         {
             var googleCalendar = new GoogleCalendar(authorizeConfigs.ToGoogle());
             var credential = googleCalendar.Credential;
@@ -33,7 +30,6 @@ namespace ConfigurationsServer.Controllers
             return authorizeConfigs;
         }
 
-        [EnableCors("Policy")]
         [HttpGet ("{user}")]
         public async Task<Calendars.AuthorizeConfigurations> GetAuthorizeConfigurations(string user)
         {
@@ -43,7 +39,6 @@ namespace ConfigurationsServer.Controllers
             return authorizeConfigurations.ToGoogle();
         }
 
-        [EnableCors("Policy")]
         [HttpDelete("{user}")]
         public async Task DeleteAuthorizeConfigurations(string user)
         {

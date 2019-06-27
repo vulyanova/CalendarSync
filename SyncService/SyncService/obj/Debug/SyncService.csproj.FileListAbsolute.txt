@@ -157,4 +157,3 @@ C:\Projects\SyncService\SyncService\obj\Debug\SyncService.application
 C:\Projects\SyncService\SyncService\obj\Debug\SyncService.csproj.CopyComplete
 C:\Projects\SyncService\SyncService\obj\Debug\SyncService.exe
 C:\Projects\SyncService\SyncService\obj\Debug\SyncService.pdb
-C:\Projects\SyncService\SyncService\obj\Debug\SyncService.csprojAssemblyReference.cache
